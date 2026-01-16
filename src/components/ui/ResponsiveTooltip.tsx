@@ -6,7 +6,9 @@ import { Tooltip } from 'antd'
 import { useMobile } from '@/hooks/useMobile'
 
 interface ResponsiveTooltipProps {
+  align?: TooltipProps['align']
   arrow?: TooltipProps['arrow']
+  autoAdjustOverflow?: TooltipProps['autoAdjustOverflow']
   children: ReactElement
   color?: TooltipProps['color']
   mouseEnterDelay?: TooltipProps['mouseEnterDelay']
