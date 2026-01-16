@@ -1,0 +1,73 @@
+/* 全局滚动条样式 */
+@layer base {
+  /* 全局滚动条 - 优化版本 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(156 163 175 / 0.5) transparent;
+  }
+
+  /* WebKit 滚动条基础样式 */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgb(156 163 175 / 0.4);
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+    transition: all 0.2s ease-in-out;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(156 163 175 / 0.7);
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background: rgb(156 163 175 / 0.8);
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* 暗黑模式滚动条样式 */
+  .dark * {
+    scrollbar-color: rgb(107 114 128 / 0.6) transparent;
+  }
+
+  .dark *::-webkit-scrollbar-thumb {
+    background: rgb(107 114 128 / 0.5);
+    border: 1px solid rgb(55 65 81 / 0.3);
+    background-clip: content-box;
+  }
+
+  .dark *::-webkit-scrollbar-thumb:hover {
+    background: rgb(107 114 128 / 0.8);
+    border: 1px solid rgb(55 65 81 / 0.5);
+    background-clip: content-box;
+  }
+
+  .dark *::-webkit-scrollbar-thumb:active {
+    background: rgb(107 114 128 / 0.9);
+    border: 1px solid rgb(55 65 81 / 0.6);
+    background-clip: content-box;
+  }
+
+  .dark *::-webkit-scrollbar-track {
+    background: rgb(17 24 39 / 0.3);
+    border-radius: 4px;
+  }
+
+  .dark *::-webkit-scrollbar-track:hover {
+    background: rgb(17 24 39 / 0.5);
+  }
+}
