@@ -3,6 +3,7 @@ import { Bell } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { ResponsiveTooltip } from '@/components/ui'
+import { useMobile } from '@/hooks/useMobile'
 
 import { MessageList } from './MessageList'
 import { NotificationList } from './NotificationList'
@@ -36,19 +37,22 @@ const items = [
  */
 export function NotificationButton({ className, onClick }: NotificationButtonProps) {
   const { t } = useTranslation()
+  const isMobile = useMobile()
 
   const notificationContent = <Tabs defaultActiveKey="1" items={items} />
 
+  const bellIcon = (
+    <div
+      onClick={onClick}
+      className={`guide-notification hover:text-primary cursor-pointer transition-colors ${className || ''}`}
+    >
+      <Bell size={20} />
+    </div>
+  )
+
   return (
     <Popover content={notificationContent} title="通知" trigger="click">
-      <ResponsiveTooltip title={t('tooltip.notification')}>
-        <div
-          onClick={onClick}
-          className={`guide-notification hover:text-primary cursor-pointer transition-colors ${className || ''}`}
-        >
-          <Bell size={20} />
-        </div>
-      </ResponsiveTooltip>
+      {isMobile ? bellIcon : <ResponsiveTooltip title={t('tooltip.notification')}>{bellIcon}</ResponsiveTooltip>}
     </Popover>
   )
 }
