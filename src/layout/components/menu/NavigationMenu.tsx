@@ -95,14 +95,14 @@ export function NavigationMenu({
         components: {
           Menu: {
             activeBarBorderWidth: 0,
-            darkItemBg: 'rgba(255, 255, 255, 0.05)',
-            darkItemSelectedBg: 'rgba(255, 255, 255, 0.1)',
+            darkItemBg: 'rgba(255, 255, 255, 0)',
+            darkItemSelectedBg: hexToRgba(token.colorPrimaryBg, 0.7),
             darkPopupBg: 'rgba(0, 0, 0, 1)',
-            darkSubMenuItemBg: 'rgba(255, 255, 255, 0.05)',
-            itemBg: 'rgba(255, 255, 255, 0.05)',
-            itemSelectedBg: hexToRgba(token.colorPrimaryBg, 0.7),
+            darkSubMenuItemBg: 'rgba(255, 255, 255, 0)',
+            itemBg: 'rgba(255, 255, 255, 0)',
+            itemSelectedBg: hexToRgba(token.colorPrimaryBg, 0.5),
             popupBg: 'rgba(255, 255, 255, 1)',
-            subMenuItemBg: 'rgba(255, 255, 255, 0.05)',
+            subMenuItemBg: 'rgba(255, 255, 255, 0)',
           },
         },
       }}

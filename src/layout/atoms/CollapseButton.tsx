@@ -1,4 +1,4 @@
-import { ListCollapse } from 'lucide-react'
+import { PanelLeftClose } from 'lucide-react'
 
 import { useSettingStore } from '@/stores'
 
@@ -16,7 +16,7 @@ export function CollapseButton() {
         isSidebarCollapsed ? '' : 'rotate-180'
       }`}
     >
-      <ListCollapse size={24} />
+      <PanelLeftClose size={20} />
     </button>
   )
 }
