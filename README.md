@@ -9,7 +9,7 @@
 
 <p align="center">基于 React 19 + TypeScript + Vite 构建的现代化管理后台系统</p>
 
-## 🚀 快速开始
+## 快速开始
 
 ### 环境要求
 
@@ -40,7 +40,7 @@ pnpm run dev
 
 访问 [http://localhost:5173](http://localhost:5173) 查看应用。
 
-## 🏗️ 项目结构
+## 项目结构
 
 ```
 apps/admin/
@@ -63,7 +63,7 @@ apps/admin/
 └── package.json           # 项目配置
 ```
 
-## 🛠️ 技术栈
+## 技术栈
 
 ### 核心框架
 
@@ -113,7 +113,7 @@ apps/admin/
 - **请求拦截器**：自动在请求头中注入 `Authorization`，用于身份认证。
 - **响应拦截器**：实现了 `token` 自动刷新机制。当 `access_token` 过期时，会尝试使用 `refresh_token` 获取新的 `token`，并重发原始请求，对用户无感。如果刷新失败，则会清除本地认证信息并重定向到登录页。
 
-## 📝 开发指南
+## 开发指南
 
 ### 代码规范
 
@@ -148,7 +148,7 @@ pnpm run format:check
 pnpm run type-check
 ```
 
-## 🔧 配置说明
+## 配置说明
 
 ### ESLint 配置
 
@@ -169,7 +169,7 @@ pnpm run type-check
 - React 插件支持
 - 支持 TypeScript 和 JSX
 
-## 🚀 部署
+## 部署
 
 ### 构建生产版本
 
