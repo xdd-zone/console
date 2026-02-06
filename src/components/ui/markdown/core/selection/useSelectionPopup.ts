@@ -77,7 +77,9 @@ export function useSelectionPopup(containerRef: MutableRefObject<HTMLDivElement 
     if (text.length === 0) return
     try {
       await navigator.clipboard.writeText(text)
-    } catch {}
+    } catch (error) {
+      console.error('复制失败:', error)
+    }
     hide()
   }, [text, hide])
 

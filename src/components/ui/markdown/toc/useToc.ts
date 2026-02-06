@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import type { TocItem, UseTocOptions } from './types'
 
@@ -105,8 +105,12 @@ export const useToc = ({
 
     computeProgress()
 
-    const onScroll = (): void => computeProgress()
-    const onResize = (): void => computeProgress()
+    const onScroll = (): void => {
+      window.requestAnimationFrame(computeProgress)
+    }
+    const onResize = (): void => {
+      window.requestAnimationFrame(computeProgress)
+    }
 
     if (scrollParent === window) {
       window.addEventListener('scroll', onScroll, { passive: true })
@@ -127,7 +131,7 @@ export const useToc = ({
     }
   }, [items, containerRef])
 
-  const scrollToTop = (): void => {
+  const scrollToTop = useCallback((): void => {
     const container = containerRef.current
     if (!container) return
     const scrollParent = getScrollParent(container)
@@ -141,7 +145,7 @@ export const useToc = ({
       const top = rect.top - spRect.top + sp.scrollTop
       sp.scrollTo({ behavior: 'smooth', top })
     }
-  }
+  }, [containerRef])
 
   return { activeId, items, progress, scrollToTop }
 }

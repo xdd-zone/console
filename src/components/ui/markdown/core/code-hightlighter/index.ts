@@ -36,18 +36,32 @@ export const createClientHighlighter = (): HighlighterCore | null => {
   return singleton
 }
 
+let langLoaderCache: Record<string, LanguageInput> | null = null
+
+/**
+ * 获取语言加载器（带缓存）：
+ * - 首次调用时缓存整个 bundledLanguages 模块
+ * - 后续调用直接从缓存读取，避免重复导入
+ */
+const getLangLoader = async (lang: string) => {
+  if (!langLoaderCache) {
+    const { bundledLanguages } = await import('shiki/langs')
+    langLoaderCache = bundledLanguages as Record<string, LanguageInput>
+  }
+  return langLoaderCache[lang]
+}
+
 /**
  * 确保指定语言已加载到高亮器：
- * - 从 bundledLanguages 动态导入语言模块
+ * - 从缓存的 bundledLanguages 获取语言加载器
  * - 若语言已加载或不存在对应 loader，则跳过
  */
 export const ensureLanguageLoaded = async (highlighter: HighlighterCore, lang: string) => {
-  const { bundledLanguages } = await import('shiki/langs')
-  const loader = (bundledLanguages as Record<string, () => Promise<unknown>>)[lang]
+  const loader = await getLangLoader(lang)
   if (!loader) return
   const loaded = highlighter.getLoadedLanguages().includes(lang)
   if (!loaded) {
-    const mod = await loader()
+    const mod = typeof loader === 'function' ? await loader() : loader
     await highlighter.loadLanguage(mod as LanguageInput)
   }
 }
