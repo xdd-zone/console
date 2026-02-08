@@ -1,12 +1,23 @@
-import type { FC, JSX } from 'react'
-
 import { clsx } from 'clsx'
+import React from 'react'
 
 import { useMarkdownTheme } from '../theme/useTheme'
 import { extractText, slugify } from '../utils/slugify'
 
-const createHeading = (level: 1 | 2 | 3 | 4 | 5 | 6): FC<JSX.IntrinsicElements[`h${typeof level}`]> => {
-  return ({ children, className, ...rest }) => {
+const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const
+
+const createHeading = (level: 1 | 2 | 3 | 4 | 5 | 6) => {
+  const tagName = headingTags[level - 1]
+
+  return ({
+    children,
+    className,
+    ...rest
+  }: {
+    [key: string]: unknown
+    children?: React.ReactNode
+    className?: string
+  }) => {
     const theme = useMarkdownTheme()
     const text = extractText(children)
     const id = slugify(text)
@@ -30,42 +41,8 @@ const createHeading = (level: 1 | 2 | 3 | 4 | 5 | 6): FC<JSX.IntrinsicElements[`
 
     return (
       <div style={{ display: 'contents' }}>
-        {level === 1 && (
-          <h1 {...headingProps}>
-            {children}
-            {anchor}
-          </h1>
-        )}
-        {level === 2 && (
-          <h2 {...headingProps}>
-            {children}
-            {anchor}
-          </h2>
-        )}
-        {level === 3 && (
-          <h3 {...headingProps}>
-            {children}
-            {anchor}
-          </h3>
-        )}
-        {level === 4 && (
-          <h4 {...headingProps}>
-            {children}
-            {anchor}
-          </h4>
-        )}
-        {level === 5 && (
-          <h5 {...headingProps}>
-            {children}
-            {anchor}
-          </h5>
-        )}
-        {level === 6 && (
-          <h6 {...headingProps}>
-            {children}
-            {anchor}
-          </h6>
-        )}
+        {/* 使用 createElement 动态创建标题元素 */}
+        {React.createElement(tagName, headingProps, children, anchor)}
       </div>
     )
   }

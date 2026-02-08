@@ -21,6 +21,79 @@ const getScrollParent = (el: HTMLElement): Window | HTMLElement => {
   return window
 }
 
+/**
+ * 提取标题文本，处理多种节点类型
+ */
+const getHeadingText = (node: HTMLElement): string => {
+  const textFromTextNodes = Array.from(node.childNodes)
+    .map((n) => (n.nodeType === Node.TEXT_NODE ? (n.textContent ?? '') : ''))
+    .join('')
+  const raw = textFromTextNodes.length > 0 ? textFromTextNodes : (node.textContent ?? '')
+  return raw.replace(/\s*#\s*$/, '').trim()
+}
+
+/**
+ * 计算 Window 滚动进度
+ */
+const computeProgressForWindow = (
+  container: HTMLElement,
+  containerRect: DOMRect,
+  items: TocItem[],
+): { activeId: string; progress: number } => {
+  const headings = items
+    .map((item) => ({ el: document.getElementById(item.id), item }))
+    .filter((x): x is { el: HTMLElement; item: TocItem } => Boolean(x.el))
+
+  let currentId = headings[0]?.item.id ?? ''
+  for (const { el, item } of headings) {
+    const top = el.getBoundingClientRect().top
+    if (top <= 120) currentId = item.id
+    else break
+  }
+
+  const containerTop = containerRect.top + window.scrollY
+  const containerHeight = Math.max(container.scrollHeight, containerRect.height)
+  const viewportH = window.innerHeight
+  const start = containerTop
+  const end = Math.max(containerTop + containerHeight - viewportH, containerTop)
+  const totalScrollable = Math.max(end - start, 1)
+  const current = Math.min(Math.max(window.scrollY - start, 0), totalScrollable)
+  const progress = Math.round((current / totalScrollable) * 100)
+
+  return { activeId: currentId, progress }
+}
+
+/**
+ * 计算元素内滚动进度
+ */
+const computeProgressForElement = (
+  container: HTMLElement,
+  containerRect: DOMRect,
+  scrollParent: HTMLElement,
+  items: TocItem[],
+): { activeId: string; progress: number } => {
+  const headings = items
+    .map((item) => ({ el: document.getElementById(item.id), item }))
+    .filter((x): x is { el: HTMLElement; item: TocItem } => Boolean(x.el))
+
+  let currentId = headings[0]?.item.id ?? ''
+  for (const { el, item } of headings) {
+    const top = el.getBoundingClientRect().top
+    if (top <= 120) currentId = item.id
+    else break
+  }
+
+  const spRect = scrollParent.getBoundingClientRect()
+  const start = containerRect.top - spRect.top + scrollParent.scrollTop
+  const containerHeight = Math.max(container.scrollHeight, containerRect.height)
+  const end = Math.max(start + containerHeight - scrollParent.clientHeight, start)
+  const totalScrollable = Math.max(end - start, 1)
+  const current = Math.min(Math.max(scrollParent.scrollTop - start, 0), totalScrollable)
+  const progress = Math.round((current / totalScrollable) * 100)
+
+  return { activeId: currentId, progress }
+}
+
 export const useToc = ({
   containerRef,
   maxLevel = 6,
@@ -43,13 +116,6 @@ export const useToc = ({
     const collected = nodes
       .map((el) => {
         const level = getHeadingLevel(el.tagName)
-        const getHeadingText = (node: HTMLElement): string => {
-          const textFromTextNodes = Array.from(node.childNodes)
-            .map((n) => (n.nodeType === Node.TEXT_NODE ? (n.textContent ?? '') : ''))
-            .join('')
-          const raw = textFromTextNodes.length > 0 ? textFromTextNodes : (node.textContent ?? '')
-          return raw.replace(/\s*#\s*$/, '').trim()
-        }
         const text = getHeadingText(el as HTMLElement)
         const id = (el as HTMLElement).id
         return { id, level, text }
@@ -66,41 +132,15 @@ export const useToc = ({
     const scrollParent = getScrollParent(container)
 
     const computeProgress = (): void => {
-      const headings = items
-        .map((item) => ({ el: document.getElementById(item.id), item }))
-        .filter((x): x is { el: HTMLElement; item: TocItem } => Boolean(x.el))
+      // 每次滚动时重新获取 containerRect，因为 getBoundingClientRect() 相对于视口会变化
+      const containerRect = container.getBoundingClientRect()
+      const result =
+        scrollParent === window
+          ? computeProgressForWindow(container, containerRect, items)
+          : computeProgressForElement(container, containerRect, scrollParent as HTMLElement, items)
 
-      let currentId = headings[0]?.item.id ?? ''
-      for (const { el, item } of headings) {
-        const top = el.getBoundingClientRect().top
-        if (top <= 120) currentId = item.id
-        else break
-      }
-      setActiveId(currentId)
-
-      const rect = container.getBoundingClientRect()
-
-      if (scrollParent === window) {
-        const containerTop = rect.top + window.scrollY
-        const containerHeight = Math.max(container.scrollHeight, rect.height)
-        const viewportH = window.innerHeight
-        const start = containerTop
-        const end = Math.max(containerTop + containerHeight - viewportH, containerTop)
-        const totalScrollable = Math.max(end - start, 1)
-        const current = Math.min(Math.max(window.scrollY - start, 0), totalScrollable)
-        const percent = Math.round((current / totalScrollable) * 100)
-        setProgress(percent)
-      } else {
-        const sp = scrollParent as HTMLElement
-        const spRect = sp.getBoundingClientRect()
-        const start = rect.top - spRect.top + sp.scrollTop
-        const containerHeight = Math.max(container.scrollHeight, rect.height)
-        const end = Math.max(start + containerHeight - sp.clientHeight, start)
-        const totalScrollable = Math.max(end - start, 1)
-        const current = Math.min(Math.max(sp.scrollTop - start, 0), totalScrollable)
-        const percent = Math.round((current / totalScrollable) * 100)
-        setProgress(percent)
-      }
+      setActiveId(result.activeId)
+      setProgress(result.progress)
     }
 
     computeProgress()
@@ -142,9 +182,9 @@ export const useToc = ({
 
     const animate = (currentTime: number): void => {
       const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const easeProgress = 1 - (1 - progress) ** 3
-      const currentY = startY - startY * easeProgress
+      const easeProgress = Math.min(elapsed / duration, 1)
+      const easeValue = 1 - (1 - easeProgress) ** 3
+      const currentY = startY - startY * easeValue
 
       if (scrollParent === window) {
         window.scrollTo(0, currentY)
@@ -152,7 +192,7 @@ export const useToc = ({
         ;(scrollParent as HTMLElement).scrollTop = currentY
       }
 
-      if (progress < 1) {
+      if (easeProgress < 1) {
         requestAnimationFrame(animate)
       }
     }

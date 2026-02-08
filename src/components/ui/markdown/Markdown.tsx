@@ -9,6 +9,7 @@ import { hexToRgb } from '@/utils/theme'
 import type { MarkdownTheme } from './theme/types'
 
 import { SelectionPopup, useSelectionPopup } from './core'
+import { MarkdownErrorBoundary } from './MarkdownErrorBoundary'
 import {
   Anchor,
   Blockquote,
@@ -114,12 +115,15 @@ const MarkdownInner = ({ accentColor, className, md }: { accentColor?: string; c
  * 外层 Markdown 组件：提供主题上下文并包裹编译渲染
  * - `value` 优先；若未传入则回退到 `children`
  * - 支持传入自定义主题 `MarkdownTheme`，否则使用默认主题
+ * - 使用 ErrorBoundary 捕获渲染错误，防止异常 Markdown 导致崩溃
  */
 export function Markdown({ accentColor, children, className, theme, value }: MarkdownProps): ReactNode {
   const md = value ?? children ?? ''
   return (
     <MarkdownThemeProvider theme={theme}>
-      <MarkdownInner accentColor={accentColor} className={className} md={md} />
+      <MarkdownErrorBoundary>
+        <MarkdownInner accentColor={accentColor} className={className} md={md} />
+      </MarkdownErrorBoundary>
     </MarkdownThemeProvider>
   )
 }
