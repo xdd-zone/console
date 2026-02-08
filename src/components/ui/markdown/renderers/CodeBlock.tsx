@@ -4,7 +4,6 @@ import { clsx } from 'clsx'
 import { Check, Copy, FileCode } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { SiGnubash, SiGo, SiJavascript, SiJson, SiPython, SiRust, SiTypescript } from 'react-icons/si'
-import sanitizeHtml from 'sanitize-html'
 
 import { useSettingStore } from '@/stores'
 
@@ -64,20 +63,7 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
         await ensureLanguageLoaded(highlighter, lang)
       } catch {}
       const htmlText = codeToHtml(highlighter, { code, lang, mode: isDark ? 'dark' : 'light' })
-      const sanitizedHtml = sanitizeHtml(htmlText, {
-        allowedAttributes: {
-          '*': ['class', 'style'],
-        },
-        allowedStyles: {
-          '*': {
-            'background-color': [/^#[0-9a-f]{3,6}$/i, /^rgba?\(/i],
-            color: [/^#[0-9a-f]{3,6}$/i, /^rgba?\(/i],
-            opacity: [/^[0-9.]+$/],
-          },
-        },
-        allowedTags: ['pre', 'code', 'span', 'br', 'wbr'],
-      })
-      if (!disposed) setHtml(sanitizedHtml)
+      if (!disposed) setHtml(htmlText)
     }
     run()
     return () => {
