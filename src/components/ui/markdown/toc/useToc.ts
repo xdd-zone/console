@@ -135,16 +135,29 @@ export const useToc = ({
     const container = containerRef.current
     if (!container) return
     const scrollParent = getScrollParent(container)
-    const rect = container.getBoundingClientRect()
-    if (scrollParent === window) {
-      const top = rect.top + window.scrollY
-      window.scrollTo({ behavior: 'smooth', top })
-    } else {
-      const sp = scrollParent as HTMLElement
-      const spRect = sp.getBoundingClientRect()
-      const top = rect.top - spRect.top + sp.scrollTop
-      sp.scrollTo({ behavior: 'smooth', top })
+
+    const startY = scrollParent === window ? window.scrollY : (scrollParent as HTMLElement).scrollTop
+    const duration = 500
+    const startTime = performance.now()
+
+    const animate = (currentTime: number): void => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const easeProgress = 1 - (1 - progress) ** 3
+      const currentY = startY - startY * easeProgress
+
+      if (scrollParent === window) {
+        window.scrollTo(0, currentY)
+      } else {
+        ;(scrollParent as HTMLElement).scrollTop = currentY
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
     }
+
+    requestAnimationFrame(animate)
   }, [containerRef])
 
   return { activeId, items, progress, scrollToTop }
