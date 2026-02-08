@@ -19,7 +19,7 @@ export const Toc: FC<TocProps> = ({ className, containerRef, maxLevel = 6, minLe
   const { activeId, items, progress, scrollToTop } = useToc({ containerRef, maxLevel, minLevel })
   if (items.length === 0) return null
   return (
-    <aside className={clsx('sticky top-0 h-fit', className)} aria-label="Table of contents">
+    <aside className={clsx('sticky top-0 hidden h-fit lg:block', className)} aria-label="Table of contents">
       <div className="p-3 text-sm">
         <div className="relative">
           <TocNav items={items} activeId={activeId} />

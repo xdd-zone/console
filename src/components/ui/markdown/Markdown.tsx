@@ -70,7 +70,7 @@ const MarkdownInner = ({ accentColor, className, md }: { accentColor?: string; c
     }
   }
   return (
-    <div className={clsx('relative md:grid md:grid-cols-[1fr_280px] md:gap-8', className)}>
+    <div className={clsx('relative lg:grid lg:grid-cols-[1fr_280px] lg:gap-8', className)}>
       <div ref={containerRef} onMouseUp={onMouseUp} className={clsx(theme.container)} style={style}>
         {compiler(md, {
           overrides: {
@@ -103,7 +103,7 @@ const MarkdownInner = ({ accentColor, className, md }: { accentColor?: string; c
         })}
         <SelectionPopup visible={visible} position={position} onCopy={copy} />
       </div>
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Toc containerRef={containerRef} />
       </div>
     </div>

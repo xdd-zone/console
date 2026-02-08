@@ -1,6 +1,7 @@
 import type { FC, ReactElement } from 'react'
 
 import { clsx } from 'clsx'
+import { useEffect, useRef } from 'react'
 
 import type { TocItem } from './types'
 
@@ -10,18 +11,40 @@ export interface TocNavProps {
 }
 
 export const TocNav: FC<TocNavProps> = ({ activeId, items }): ReactElement | null => {
+  const itemRefs = useRef<Map<string, HTMLAnchorElement>>(new Map())
+
+  // 自动滚动到高亮的标题
+  useEffect(() => {
+    if (!activeId) return
+
+    const activeElement = itemRefs.current.get(activeId)
+    if (activeElement) {
+      activeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      })
+    }
+  }, [activeId])
+
   if (items.length === 0) return null
+
   return (
     <nav className="scrollbar-hide h-64 space-y-1 overflow-y-auto pr-1">
       {items.map((it, idx) => (
         <a
           key={`${it.id}-${idx}`}
+          ref={(el) => {
+            if (el) {
+              itemRefs.current.set(it.id, el)
+            } else {
+              itemRefs.current.delete(it.id)
+            }
+          }}
           href={`#${it.id}`}
           className={clsx(
             'block truncate rounded px-2 py-1 transition-colors',
-            it.level === 1 ? 'font-medium text-black! dark:text-white!' : 'text-black/50! dark:text-white/60!',
-            'hover:text-black! dark:hover:text-white!',
-            activeId === it.id ? 'text-black! dark:text-white!' : '',
+            activeId === it.id ? 'text-primary! dark:text-primary!' : 'text-black/50! dark:text-white/60!',
+            'hover:text-primary! dark:hover:text-primary!',
           )}
           style={{ paddingLeft: `${Math.max(0, it.level - 2) * 12}px` }}
         >
