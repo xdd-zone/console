@@ -133,7 +133,7 @@ export function TabBar() {
   }, [isMobile])
 
   return (
-    <div className="guide-tab-bar border-b border-gray-500 p-1 md:p-2">
+    <div className="guide-tab-bar border-b border-[var(--color-border)] p-1 md:p-2">
       <div className="flex items-center justify-between">
         {/* 标签区域 */}
         <div
@@ -148,17 +148,21 @@ export function TabBar() {
             <div
               key={tab.id}
               onClick={() => handleTabClick(tab.id, tab.path)}
-              className={`flex cursor-pointer items-center space-x-2 rounded border px-3 py-1.5 text-sm whitespace-nowrap transition-colors select-none ${
+              className={`flex cursor-pointer items-center space-x-2 rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition-all select-none ${
                 activeTabId === tab.id
-                  ? 'border-primary bg-primary-50 dark:bg-primary-900/20 dark:text-white'
-                  : 'hover:bg-primary/40 border-gray-500 bg-white/50 hover:text-white dark:bg-transparent dark:text-white'
+                  ? 'border-[var(--color-primary)] bg-[var(--color-bg-tertiary)] text-[var(--color-primary)] shadow-sm'
+                  : 'border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)]'
               } `}
             >
               <span>{t(tab.label)}</span>
               {tab.closable !== false && (
                 <div
                   onClick={(e) => handleTabClose(e, tab.id)}
-                  className="hover:text-primary cursor-pointer transition-colors"
+                  className={`cursor-pointer rounded-sm p-0.5 transition-colors ${
+                    activeTabId === tab.id
+                      ? 'text-[var(--color-primary)] hover:bg-[var(--color-primary)]/20'
+                      : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]'
+                  }`}
                 >
                   <X size={16} />
                 </div>

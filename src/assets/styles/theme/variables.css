@@ -3,18 +3,22 @@
 
 /* 配置 Tailwind CSS V4 主题色 */
 @theme {
-  /* 向后兼容 - 主色调 */
+  /* ========== 语义化变量 - 通过 CSS 变量引用实现动态切换 ========== */
+  /* 主色调 - 使用 CSS 变量，主题切换时自动更新 */
   --color-primary: var(--catppuccin-primary);
-  --color-primary-50: rgb(130 0 219 / 0.05);
-  --color-primary-100: rgb(130 0 219 / 0.1);
-  --color-primary-200: rgb(130 0 219 / 0.2);
-  --color-primary-300: rgb(130 0 219 / 0.3);
-  --color-primary-400: rgb(130 0 219 / 0.4);
-  --color-primary-500: var(--catppuccin-primary);
-  --color-primary-600: rgb(130 0 219 / 0.8);
-  --color-primary-700: rgb(130 0 219 / 0.7);
-  --color-primary-800: rgb(130 0 219 / 0.6);
-  --color-primary-900: rgb(130 0 219 / 0.5);
+  --color-primary-hover: var(--catppuccin-primary-hover);
+
+  /* Primary 颜色 shades - 由 JavaScript 动态生成 */
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
 
   /* 语义化背景色 */
   --color-bg-primary: var(--catppuccin-bg-primary);
@@ -30,7 +34,14 @@
   --color-text-secondary: var(--catppuccin-text-secondary);
   --color-text-muted: var(--catppuccin-text-muted);
 
-  /* Catppuccin 完整色系 - Latte */
+  /* 语义色 */
+  --color-success: var(--catppuccin-success);
+  --color-warning: var(--catppuccin-warning);
+  --color-error: var(--catppuccin-error);
+  --color-info: var(--catppuccin-info);
+
+  /* ========== Catppuccin 完整色系 - 默认使用 Latte ========== */
+  /* 这些颜色会通过 [data-theme] 选择器在不同主题下动态切换 */
   --color-rosewater: var(--catppuccin-latte-rosewater);
   --color-flamingo: var(--catppuccin-latte-flamingo);
   --color-pink: var(--catppuccin-latte-pink);
@@ -45,20 +56,11 @@
   --color-blue: var(--catppuccin-latte-blue);
   --color-sapphire: var(--catppuccin-latte-sapphire);
   --color-lavender: var(--catppuccin-latte-lavender);
-
-  /* 语义色 */
-  --color-success: var(--catppuccin-success);
-  --color-warning: var(--catppuccin-warning);
-  --color-error: var(--catppuccin-error);
-  --color-info: var(--catppuccin-info);
 }
 
-/* Frappé 主题颜色覆盖 */
-
-/* Macchiato 主题颜色覆盖 */
-
-/* Mocha 主题颜色覆盖 */
+/* ========== Frappé 主题颜色覆盖 ========== */
 [data-theme='frappe'] {
+  /* Catppuccin 色系覆盖 */
   --color-rosewater: var(--catppuccin-frappe-rosewater);
   --color-flamingo: var(--catppuccin-frappe-flamingo);
   --color-pink: var(--catppuccin-frappe-pink);
@@ -74,12 +76,13 @@
   --color-sapphire: var(--catppuccin-frappe-sapphire);
   --color-lavender: var(--catppuccin-frappe-lavender);
 
+  /* 语义色覆盖 */
   --color-success: var(--catppuccin-frappe-success);
   --color-warning: var(--catppuccin-frappe-warning);
   --color-error: var(--catppuccin-frappe-error);
   --color-info: var(--catppuccin-frappe-info);
 
-  /* 语义化变量覆盖 */
+  /* 语义化变量覆盖 - 确保 TailwindCSS 工具类使用正确的值 */
   --color-bg-primary: var(--catppuccin-bg-primary);
   --color-bg-secondary: var(--catppuccin-bg-secondary);
   --color-bg-tertiary: var(--catppuccin-bg-tertiary);
@@ -89,9 +92,12 @@
   --color-text-secondary: var(--catppuccin-text-secondary);
   --color-text-muted: var(--catppuccin-text-muted);
   --color-primary: var(--catppuccin-primary);
+  --color-primary-hover: var(--catppuccin-primary-hover);
 }
 
+/* ========== Macchiato 主题颜色覆盖 ========== */
 [data-theme='macchiato'] {
+  /* Catppuccin 色系覆盖 */
   --color-rosewater: var(--catppuccin-macchiato-rosewater);
   --color-flamingo: var(--catppuccin-macchiato-flamingo);
   --color-pink: var(--catppuccin-macchiato-pink);
@@ -107,6 +113,7 @@
   --color-sapphire: var(--catppuccin-macchiato-sapphire);
   --color-lavender: var(--catppuccin-macchiato-lavender);
 
+  /* 语义色覆盖 */
   --color-success: var(--catppuccin-macchiato-success);
   --color-warning: var(--catppuccin-macchiato-warning);
   --color-error: var(--catppuccin-macchiato-error);
@@ -122,9 +129,12 @@
   --color-text-secondary: var(--catppuccin-text-secondary);
   --color-text-muted: var(--catppuccin-text-muted);
   --color-primary: var(--catppuccin-primary);
+  --color-primary-hover: var(--catppuccin-primary-hover);
 }
 
+/* ========== Mocha 主题颜色覆盖 ========== */
 [data-theme='mocha'] {
+  /* Catppuccin 色系覆盖 */
   --color-rosewater: var(--catppuccin-mocha-rosewater);
   --color-flamingo: var(--catppuccin-mocha-flamingo);
   --color-pink: var(--catppuccin-mocha-pink);
@@ -140,6 +150,7 @@
   --color-sapphire: var(--catppuccin-mocha-sapphire);
   --color-lavender: var(--catppuccin-mocha-lavender);
 
+  /* 语义色覆盖 */
   --color-success: var(--catppuccin-mocha-success);
   --color-warning: var(--catppuccin-mocha-warning);
   --color-error: var(--catppuccin-mocha-error);
@@ -155,4 +166,5 @@
   --color-text-secondary: var(--catppuccin-text-secondary);
   --color-text-muted: var(--catppuccin-text-muted);
   --color-primary: var(--catppuccin-primary);
+  --color-primary-hover: var(--catppuccin-primary-hover);
 }
