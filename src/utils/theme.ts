@@ -12,10 +12,21 @@ export const getSystemPrefersDark = (): boolean => {
 
 /**
  * 更新 HTML 元素的主题属性
+ * @param themeId - Catppuccin 主题 ID (latte | frappe | macchiato | mocha)
  */
-export const updateThemeAttribute = (isDark: boolean) => {
+export const updateThemeAttribute = (themeId: string) => {
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
+    document.documentElement.setAttribute('data-theme', themeId)
+  }
+}
+
+/**
+ * 根据布尔值更新 HTML 元素的主题属性（兼容性函数）
+ * @deprecated 请使用 updateThemeAttribute(themeId)
+ */
+export const updateThemeAttributeByBool = (isDark: boolean) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', isDark ? 'mocha' : 'latte')
   }
 }
 

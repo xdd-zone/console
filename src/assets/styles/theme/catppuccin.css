@@ -58,9 +58,8 @@
   --catppuccin-latte-text-muted: #8c8fa1;
 }
 
-/* ========== Mocha（暗色主题） ========== */
 /* ========== Macchiato（暗色主题） ========== */
-[data-theme='dark'] {
+[data-theme='macchiato'] {
   /* 基色系统 */
   --catppuccin-macchiato-base: #181825;
   --catppuccin-macchiato-mantle: #1e1e2e;
@@ -89,7 +88,7 @@
 }
 
 /* ========== Mocha（暗色主题） ========== */
-[data-theme='dark'] {
+[data-theme='mocha'] {
   /* 基色系统 */
   --catppuccin-mocha-base: #1e1e2e;
   --catppuccin-mocha-mantle: #181825;

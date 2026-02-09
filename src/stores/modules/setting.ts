@@ -97,7 +97,7 @@ const getInitialThemeState = () => {
 
   // 立即更新 DOM 属性，避免闪烁
   if (typeof document !== 'undefined') {
-    updateThemeAttribute(isDark)
+    updateThemeAttribute(catppuccinTheme)
     updatePrimaryColorAttribute(primaryColor)
   }
 
@@ -122,7 +122,7 @@ export const useSettingStore = create<SettingState>()(
           const { themeMode } = get()
           const isDark = calculateIsDark(themeMode)
           set({ isDark })
-          updateThemeAttribute(isDark)
+          updateThemeAttribute(initialTheme.catppuccinTheme)
         },
 
         isDark: initialTheme.isDark,
@@ -152,7 +152,7 @@ export const useSettingStore = create<SettingState>()(
           const isDark = getSystemPrefersDark()
           const newCatppuccinTheme = isDark ? 'mocha' : 'latte'
           set({ catppuccinTheme: newCatppuccinTheme, isDark, themeMode: 'system' as const })
-          updateThemeAttribute(isDark)
+          updateThemeAttribute(newCatppuccinTheme)
 
           // 更新主色
           const theme = getThemeById(newCatppuccinTheme)
@@ -171,12 +171,15 @@ export const useSettingStore = create<SettingState>()(
           const newThemeMode: 'light' | 'dark' = newIsDark ? 'dark' : 'light'
           set({ catppuccinTheme, isDark: newIsDark, themeMode: newThemeMode })
           updatePrimaryColorAttribute(primaryColor)
-          updateThemeAttribute(newIsDark)
+          updateThemeAttribute(catppuccinTheme)
         },
 
         setDarkMode: (isDark: boolean) => {
           set({ isDark })
-          updateThemeAttribute(isDark)
+          // 根据 isDark 选择对应的主题
+          const newCatppuccinTheme: 'latte' | 'frappe' | 'macchiato' | 'mocha' = isDark ? 'mocha' : 'latte'
+          set({ catppuccinTheme: newCatppuccinTheme })
+          updateThemeAttribute(newCatppuccinTheme)
         },
 
         setLanguage: async (language: string) => {
@@ -207,7 +210,7 @@ export const useSettingStore = create<SettingState>()(
           // 根据主题模式选择对应的 Catppuccin 主题
           const newCatppuccinTheme = isDark ? 'mocha' : 'latte'
           set({ catppuccinTheme: newCatppuccinTheme, isDark, themeMode })
-          updateThemeAttribute(isDark)
+          updateThemeAttribute(newCatppuccinTheme)
 
           // 更新主色
           const theme = getThemeById(newCatppuccinTheme)
@@ -225,7 +228,7 @@ export const useSettingStore = create<SettingState>()(
           // 切换时同步更新 catppuccinTheme
           const newCatppuccinTheme = newIsDark ? 'mocha' : 'latte'
           set({ catppuccinTheme: newCatppuccinTheme, isDark: newIsDark, themeMode: newThemeMode })
-          updateThemeAttribute(newIsDark)
+          updateThemeAttribute(newCatppuccinTheme)
 
           // 更新主色
           const theme = getThemeById(newCatppuccinTheme)
@@ -276,7 +279,7 @@ if (typeof window !== 'undefined') {
       // 系统主题变化时，同步更新 catppuccinTheme
       const newCatppuccinTheme = isDark ? 'mocha' : 'latte'
       useSettingStore.setState({ catppuccinTheme: newCatppuccinTheme, isDark })
-      updateThemeAttribute(isDark)
+      updateThemeAttribute(newCatppuccinTheme)
 
       // 更新主色
       const theme = getThemeById(newCatppuccinTheme)
@@ -286,5 +289,5 @@ if (typeof window !== 'undefined') {
     }
   }
 
-  mediaQuery.onchange = handleSystemThemeChange
+  mediaQuery.addEventListener?.('change', handleSystemThemeChange)
 }
