@@ -23,8 +23,8 @@ export function Register() {
     <AuthContainer>
       {/* 标题 */}
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">{t('auth.registerTitle')}</h1>
-        <p className="text-gray-600 dark:text-gray-300">{t('auth.createAccount')}</p>
+        <h1 className="mb-2 text-2xl font-bold text-[var(--catppuccin-text-primary)]">{t('auth.registerTitle')}</h1>
+        <p className="text-[var(--catppuccin-text-secondary)]">{t('auth.createAccount')}</p>
       </div>
 
       {/* 注册表单 */}
@@ -95,20 +95,20 @@ export function Register() {
 
       {/* 分割线 */}
       <Divider className="my-6">
-        <span className="text-sm text-gray-500 dark:text-gray-400">{t('auth.orSocialRegister')}</span>
+        <span className="text-sm text-[var(--catppuccin-text-muted)]">{t('auth.orSocialRegister')}</span>
       </Divider>
 
       {/* 社交登录按钮 */}
       <div className="flex gap-4">
         <Button
           icon={<AiFillWechat />}
-          className="h-12 flex-1 rounded-lg border-gray-300 transition-colors hover:border-green-500 hover:text-green-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:border-green-400 dark:hover:text-green-400"
+          className="h-12 flex-1 rounded-lg border-[var(--catppuccin-border)] bg-transparent text-[var(--catppuccin-text-secondary)] transition-colors hover:border-[#22c55e] hover:text-[#22c55e]"
         >
           {t('auth.wechatRegister')}
         </Button>
         <Button
           icon={<AiOutlineGoogle />}
-          className="h-12 flex-1 rounded-lg border-gray-300 transition-colors hover:border-red-500 hover:text-red-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:border-red-400 dark:hover:text-red-400"
+          className="h-12 flex-1 rounded-lg border-[var(--catppuccin-border)] bg-transparent text-[var(--catppuccin-text-secondary)] transition-colors hover:border-[#ef4444] hover:text-[#ef4444]"
         >
           {t('auth.googleRegister')}
         </Button>
@@ -116,10 +116,10 @@ export function Register() {
 
       {/* 登录链接 */}
       <div className="mt-6 text-center">
-        <span className="text-sm text-gray-600 dark:text-gray-300">{t('auth.haveAccount')}</span>
+        <span className="text-sm text-[var(--catppuccin-text-secondary)]">{t('auth.haveAccount')}</span>
         <a
           href="#"
-          className="ml-1 text-sm text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+          className="ml-1 text-sm text-[var(--catppuccin-primary)] transition-colors hover:text-[var(--catppuccin-primary-hover)]"
         >
           {t('auth.loginNow')}
         </a>

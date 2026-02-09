@@ -32,15 +32,19 @@ export function AuthContainer({ children }: AuthContainerProps) {
         {/* Pattern 背景 */}
         <Pattern animationDuration={6} />
 
-        {/* 主题切换和语言切换按钮 */}
+        {/* 主题切换和语言切换按钮 - 使用 CSS 变量适配所有主题 */}
         <div className="absolute top-4 right-4 z-20 flex items-center gap-2 md:top-6 md:right-6">
-          <LanguageButton className="rounded-lg p-2 text-xl text-gray-600 transition-all duration-200 hover:bg-white/20 hover:text-gray-800 md:text-2xl dark:text-gray-300 dark:hover:bg-black/20 dark:hover:text-white" />
-          <ThemeToggle className="rounded-lg p-2 text-xl text-gray-600 transition-all duration-200 hover:bg-white/20 hover:text-gray-800 md:text-2xl dark:text-gray-300 dark:hover:bg-black/20 dark:hover:text-white" />
+          <div className="cursor-pointer rounded-lg p-2 text-[var(--catppuccin-text-secondary)] transition-all duration-200 hover:bg-white/20">
+            <LanguageButton />
+          </div>
+          <div className="cursor-pointer rounded-lg p-2 text-[var(--catppuccin-text-secondary)] transition-all duration-200 hover:bg-white/20">
+            <ThemeToggle />
+          </div>
         </div>
 
-        {/* 内容表单区域 */}
+        {/* 内容表单区域 - 使用语义化 CSS 变量适配 4 套主题 */}
         <div className="relative z-10 h-full w-full md:mx-auto md:max-w-md md:px-6 md:py-8 lg:max-w-lg xl:max-w-xl">
-          <div className="flex h-full flex-col justify-center bg-white/50 p-6 shadow-lg md:h-auto md:min-h-0 md:justify-start md:rounded-xl md:border md:p-8 lg:px-12 lg:py-10 dark:border-gray-700 dark:bg-black/50 dark:shadow-2xl">
+          <div className="flex h-full flex-col justify-center border-[var(--catppuccin-border)] bg-[var(--catppuccin-bg-secondary)] p-6 shadow-lg md:h-auto md:min-h-0 md:justify-start md:rounded-xl md:p-8 lg:px-12 lg:py-10">
             <div className="mx-auto w-full max-w-sm">{children}</div>
           </div>
         </div>
