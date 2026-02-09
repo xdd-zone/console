@@ -204,8 +204,8 @@ export const useSettingStore = create<SettingState>()(
 
         setThemeMode: (themeMode: 'light' | 'dark' | 'system') => {
           const isDark = calculateIsDark(themeMode)
-          // 亮色模式默认 latte，暗色模式默认 mocha
-          const newCatppuccinTheme = themeMode === 'dark' ? 'mocha' : 'latte'
+          // 根据主题模式选择对应的 Catppuccin 主题
+          const newCatppuccinTheme = isDark ? 'mocha' : 'latte'
           set({ catppuccinTheme: newCatppuccinTheme, isDark, themeMode })
           updateThemeAttribute(isDark)
 

@@ -78,6 +78,17 @@
   --color-warning: var(--catppuccin-frappe-warning);
   --color-error: var(--catppuccin-frappe-error);
   --color-info: var(--catppuccin-frappe-info);
+
+  /* 语义化变量覆盖 */
+  --color-bg-primary: var(--catppuccin-bg-primary);
+  --color-bg-secondary: var(--catppuccin-bg-secondary);
+  --color-bg-tertiary: var(--catppuccin-bg-tertiary);
+  --color-border: var(--catppuccin-border);
+  --color-border-secondary: var(--catppuccin-border-secondary);
+  --color-text-primary: var(--catppuccin-text-primary);
+  --color-text-secondary: var(--catppuccin-text-secondary);
+  --color-text-muted: var(--catppuccin-text-muted);
+  --color-primary: var(--catppuccin-primary);
 }
 
 [data-theme='macchiato'] {
@@ -100,6 +111,17 @@
   --color-warning: var(--catppuccin-macchiato-warning);
   --color-error: var(--catppuccin-macchiato-error);
   --color-info: var(--catppuccin-macchiato-info);
+
+  /* 语义化变量覆盖 */
+  --color-bg-primary: var(--catppuccin-bg-primary);
+  --color-bg-secondary: var(--catppuccin-bg-secondary);
+  --color-bg-tertiary: var(--catppuccin-bg-tertiary);
+  --color-border: var(--catppuccin-border);
+  --color-border-secondary: var(--catppuccin-border-secondary);
+  --color-text-primary: var(--catppuccin-text-primary);
+  --color-text-secondary: var(--catppuccin-text-secondary);
+  --color-text-muted: var(--catppuccin-text-muted);
+  --color-primary: var(--catppuccin-primary);
 }
 
 [data-theme='mocha'] {
@@ -122,4 +144,15 @@
   --color-warning: var(--catppuccin-mocha-warning);
   --color-error: var(--catppuccin-mocha-error);
   --color-info: var(--catppuccin-mocha-info);
+
+  /* 语义化变量覆盖 */
+  --color-bg-primary: var(--catppuccin-bg-primary);
+  --color-bg-secondary: var(--catppuccin-bg-secondary);
+  --color-bg-tertiary: var(--catppuccin-bg-tertiary);
+  --color-border: var(--catppuccin-border);
+  --color-border-secondary: var(--catppuccin-border-secondary);
+  --color-text-primary: var(--catppuccin-text-primary);
+  --color-text-secondary: var(--catppuccin-text-secondary);
+  --color-text-muted: var(--catppuccin-text-muted);
+  --color-primary: var(--catppuccin-primary);
 }

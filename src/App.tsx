@@ -10,10 +10,10 @@ import { useSettingStore } from './stores'
 import { getAntdThemeConfig } from './utils/catppuccin.antd'
 
 export function App() {
-  const { catppuccinTheme, isDark } = useSettingStore()
+  const { catppuccinTheme } = useSettingStore()
 
   // 获取 Catppuccin 主题配置
-  const themeConfig = getAntdThemeConfig(isDark)
+  const themeConfig = getAntdThemeConfig(catppuccinTheme)
 
   // 使用当前主题的 Blue 作为主色
   const primaryColor = getPrimaryColorByTheme(catppuccinTheme)
