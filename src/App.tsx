@@ -1,20 +1,37 @@
-import { App as AntdApp, ConfigProvider, theme } from 'antd'
+import { App as AntdApp, ConfigProvider } from 'antd'
+import { useEffect } from 'react'
 import { RouterProvider } from 'react-router'
 
 import './i18n' // 初始化 i18n
+import { getPrimaryColorByTheme, hexToRgb } from '@/utils/theme'
+
 import { router } from './router'
 import { useSettingStore } from './stores'
+import { getAntdThemeConfig } from './utils/catppuccin.antd'
 
 export function App() {
-  const { isDark, primaryColor } = useSettingStore()
+  const { catppuccinTheme, isDark } = useSettingStore()
 
-  const algorithm = isDark ? theme.darkAlgorithm : theme.defaultAlgorithm
+  // 获取 Catppuccin 主题配置
+  const themeConfig = getAntdThemeConfig(isDark)
+
+  // 使用当前主题的 Blue 作为主色
+  const primaryColor = getPrimaryColorByTheme(catppuccinTheme)
+
+  // 响应式更新 CSS 变量
+  useEffect(() => {
+    const rgb = hexToRgb(primaryColor)
+    const rgbString = rgb ? `${rgb.r}, ${rgb.g}, ${rgb.b}` : '30, 102, 245'
+    document.documentElement.style.setProperty('--primary-color', primaryColor)
+    document.documentElement.style.setProperty('--primary-color-rgb', rgbString)
+  }, [primaryColor])
 
   return (
     <ConfigProvider
       theme={{
-        algorithm,
+        ...themeConfig,
         token: {
+          ...themeConfig.token,
           colorPrimary: primaryColor,
         },
       }}

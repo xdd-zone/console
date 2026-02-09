@@ -40,6 +40,12 @@ export default {
     wechatLogin: 'WeChat',
     wechatRegister: 'WeChat',
   },
+  catppuccin: {
+    frappe: 'Frappé',
+    latte: 'Latte',
+    macchiato: 'Macchiato',
+    mocha: 'Mocha',
+  },
   common: {
     actions: 'Actions',
     add: 'Add',
@@ -110,6 +116,8 @@ export default {
     tagManagement: 'Tag Management',
   },
   setting: {
+    catppuccinTheme: 'Theme Color',
+    catppuccinThemeDescription: 'Select a Catppuccin theme preset',
     layoutMode: 'Layout Mode',
     layoutModeDescription: 'Choose the layout style of the application',
     leftRightLayout: 'Left-Right Layout',

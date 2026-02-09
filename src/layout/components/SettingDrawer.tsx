@@ -1,10 +1,9 @@
-import type { ColorPickerProps } from 'antd'
-
-import { ColorPicker, Drawer, Space, Typography } from 'antd'
+import { Drawer, Space, Typography } from 'antd'
 import { Layout, Lightbulb, Monitor, Moon, Palette, PanelLeft, PanelTop, Sun } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { ResponsiveTooltip } from '@/components/ui'
+import { catppuccinThemes } from '@/config/catppuccin'
 import { useSettingStore } from '@/stores/modules/setting'
 
 const { Text, Title } = Typography
@@ -20,19 +19,19 @@ interface SettingDrawerProps {
  */
 export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
   const { t } = useTranslation()
-  const { isDark, layoutMode, primaryColor, setLayoutMode, setPrimaryColor, setThemeMode, themeMode } =
+  const { catppuccinTheme, isDark, layoutMode, setCatppuccinTheme, setLayoutMode, setThemeMode, themeMode } =
     useSettingStore()
 
   const handleLayoutChange = (mode: 'leftRight' | 'topBottom') => {
     setLayoutMode(mode)
   }
 
-  const handleColorChange: ColorPickerProps['onChange'] = (color) => {
-    setPrimaryColor(color.toHexString())
-  }
-
   const handleThemeChange = (mode: 'light' | 'dark' | 'system') => {
     setThemeMode(mode)
+  }
+
+  const handleThemeSelect = (themeId: typeof catppuccinTheme) => {
+    setCatppuccinTheme(themeId)
   }
 
   return (
@@ -101,31 +100,46 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
           </div>
         </div>
 
-        {/* 主题色设置 */}
+        {/* Catppuccin 主题设置 */}
         <div>
           <Title level={5}>
             <div className="dark:text-white">
               <Palette className="mr-2" />
-              {t('setting.primaryColor')}
+              {t('setting.catppuccinTheme')}
             </div>
           </Title>
           <Text className="dark:text-white" type="secondary">
-            {t('setting.primaryColorDescription')}
+            {t('setting.catppuccinThemeDescription')}
           </Text>
           <div style={{ marginTop: 12 }}>
-            <ColorPicker
-              value={primaryColor}
-              onChange={handleColorChange}
-              showText
-              size="large"
-              format="hex"
-              presets={[
-                {
-                  colors: ['#8200db', '#1677ff', '#00b96b', '#ff4d4f', '#fa8c16', '#722ed1', '#eb2f96', '#52c41a'],
-                  label: t('setting.recommendedColors'),
-                },
-              ]}
-            />
+            <div className="grid grid-cols-2 gap-3">
+              {catppuccinThemes.map((theme) => {
+                const isSelected = catppuccinTheme === theme.id
+                return (
+                  <div
+                    key={theme.id}
+                    className={`cursor-pointer rounded-lg border-2 p-3 transition-all duration-200 ${
+                      isSelected
+                        ? 'border-[var(--color-primary,var(--ant-color-primary))]'
+                        : 'border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:border-gray-600'
+                    }`}
+                    onClick={() => handleThemeSelect(theme.id)}
+                  >
+                    <div className="mb-2 text-sm font-medium dark:text-white">{t(`catppuccin.${theme.id}`)}</div>
+                    <div className="flex flex-wrap gap-0.5">
+                      {theme.colors.map((color) => (
+                        <div
+                          key={color.name}
+                          className="h-4 w-4 rounded-sm shadow-sm"
+                          style={{ backgroundColor: color.value }}
+                          title={color.name}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
 

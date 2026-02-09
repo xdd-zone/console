@@ -1,12 +1,11 @@
-/* 全局滚动条样式 */
+/* 全局滚动条样式 - Catppuccin 主题 */
 @layer base {
-  /* 全局滚动条 - 优化版本 */
+  /* Latte（亮色主题）滚动条 */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgb(156 163 175 / 0.5) transparent;
+    scrollbar-color: #9ca3af transparent;
   }
 
-  /* WebKit 滚动条基础样式 */
   *::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -18,20 +17,20 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background: rgb(156 163 175 / 0.4);
+    background: #9ca3af;
     border-radius: 4px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     background-clip: content-box;
     transition: all 0.2s ease-in-out;
   }
 
   *::-webkit-scrollbar-thumb:hover {
-    background: rgb(156 163 175 / 0.7);
+    background: #6b7280;
     background-clip: content-box;
   }
 
   *::-webkit-scrollbar-thumb:active {
-    background: rgb(156 163 175 / 0.8);
+    background: #4b5563;
     background-clip: content-box;
   }
 
@@ -39,35 +38,33 @@
     background: transparent;
   }
 
-  /* 暗黑模式滚动条样式 */
-  .dark * {
-    scrollbar-color: rgb(107 114 128 / 0.6) transparent;
+  /* Mocha（暗色主题）滚动条 */
+  [data-theme='dark'] * {
+    scrollbar-color: #6c7086 transparent;
   }
 
-  .dark *::-webkit-scrollbar-thumb {
-    background: rgb(107 114 128 / 0.5);
-    border: 1px solid rgb(55 65 81 / 0.3);
+  [data-theme='dark'] *::-webkit-scrollbar-thumb {
+    background: #6c7086;
+    border: 2px solid transparent;
     background-clip: content-box;
   }
 
-  .dark *::-webkit-scrollbar-thumb:hover {
-    background: rgb(107 114 128 / 0.8);
-    border: 1px solid rgb(55 65 81 / 0.5);
+  [data-theme='dark'] *::-webkit-scrollbar-thumb:hover {
+    background: #89b4fa;
     background-clip: content-box;
   }
 
-  .dark *::-webkit-scrollbar-thumb:active {
-    background: rgb(107 114 128 / 0.9);
-    border: 1px solid rgb(55 65 81 / 0.6);
+  [data-theme='dark'] *::-webkit-scrollbar-thumb:active {
+    background: #b4befe;
     background-clip: content-box;
   }
 
-  .dark *::-webkit-scrollbar-track {
-    background: rgb(17 24 39 / 0.3);
+  [data-theme='dark'] *::-webkit-scrollbar-track {
+    background: transparent;
     border-radius: 4px;
   }
 
-  .dark *::-webkit-scrollbar-track:hover {
-    background: rgb(17 24 39 / 0.5);
+  [data-theme='dark'] *::-webkit-scrollbar-track:hover {
+    background: rgb(24 24 37 / 0.5);
   }
 }

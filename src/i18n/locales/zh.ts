@@ -40,6 +40,12 @@ export default {
     wechatLogin: '微信',
     wechatRegister: '微信',
   },
+  catppuccin: {
+    frappe: '冰沙',
+    latte: '拿铁',
+    macchiato: '玛奇朵',
+    mocha: '摩卡',
+  },
   common: {
     actions: '操作',
     add: '添加',
@@ -110,6 +116,8 @@ export default {
     tagManagement: '标签管理',
   },
   setting: {
+    catppuccinTheme: '主题颜色',
+    catppuccinThemeDescription: '选择 Catppuccin 主题预设',
     layoutMode: '布局模式',
     layoutModeDescription: '选择应用的布局方式',
     leftRightLayout: '左右布局',

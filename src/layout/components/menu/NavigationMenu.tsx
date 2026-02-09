@@ -1,10 +1,11 @@
 import type { MenuProps } from 'antd'
 
 import { ConfigProvider, Menu, theme } from 'antd'
+import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
 import { useSettingStore } from '@/stores'
-import { hexToRgba } from '@/utils/theme'
+import { getPrimaryColorByTheme, hexToRgba } from '@/utils/theme'
 
 // 定义菜单项类型
 type MenuItem = Required<MenuProps>['items'][number]
@@ -68,10 +69,15 @@ export function NavigationMenu({
   onMenuClick,
   style,
 }: NavigationMenuProps) {
-  const { isDark } = useSettingStore()
+  const { catppuccinTheme, isDark } = useSettingStore()
   const { token } = theme.useToken()
   const navigate = useNavigate()
   const location = useLocation()
+
+  // 根据 catppuccinTheme 获取当前主题的 primaryColor
+  const primaryColor = useMemo(() => {
+    return getPrimaryColorByTheme(catppuccinTheme)
+  }, [catppuccinTheme])
 
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     // 如果有自定义点击事件，先执行
@@ -92,6 +98,7 @@ export function NavigationMenu({
   return (
     <ConfigProvider
       theme={{
+        algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
         components: {
           Menu: {
             activeBarBorderWidth: 0,
@@ -104,6 +111,9 @@ export function NavigationMenu({
             popupBg: 'rgba(255, 255, 255, 1)',
             subMenuItemBg: 'rgba(255, 255, 255, 0)',
           },
+        },
+        token: {
+          colorPrimary: primaryColor,
         },
       }}
     >

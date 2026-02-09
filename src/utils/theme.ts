@@ -1,3 +1,7 @@
+import type { CatppuccinTheme } from '../config/catppuccin'
+
+import { getThemeById } from '../config/catppuccin'
+
 /**
  * 获取系统是否偏好暗黑模式
  */
@@ -67,4 +71,27 @@ export const calculateIsDark = (themeMode: 'light' | 'dark' | 'system'): boolean
     default:
       return false
   }
+}
+
+/**
+ * 获取 Catppuccin 主题的完整配置
+ */
+export const getCatppuccinThemeConfig = (themeId: string): CatppuccinTheme | undefined => {
+  return getThemeById(themeId)
+}
+
+/**
+ * 获取指定主题的主色（Blue）
+ */
+export const getPrimaryColorByTheme = (themeId: string): string => {
+  const theme = getThemeById(themeId)
+  const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+  return blueColor?.value || '#1e66f5'
+}
+
+/**
+ * 判断主题是否为暗色主题
+ */
+export const isDarkTheme = (themeId: string): boolean => {
+  return ['macchiato', 'mocha'].includes(themeId)
 }

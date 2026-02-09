@@ -45,5 +45,6 @@ AGENTS.md
 
 # Deployment
 .vercel
+.sisyphus
 
 *.tsbuildinfo

@@ -1,14 +1,27 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { calculateIsDark, getSystemPrefersDark, updatePrimaryColorAttribute, updateThemeAttribute } from '@/utils/theme'
+import { catppuccinThemes, getThemeById } from '@/config/catppuccin'
+import {
+  calculateIsDark,
+  getSystemPrefersDark,
+  isDarkTheme,
+  updatePrimaryColorAttribute,
+  updateThemeAttribute,
+} from '@/utils/theme'
 
 import type { BaseStore } from '../types'
+
+/**
+ * Catppuccin 主题定义
+ */
+export type CatppuccinThemeId = 'latte' | 'frappe' | 'macchiato' | 'mocha'
 
 /**
  * 设置相关的状态接口
  */
 export interface SettingState extends BaseStore {
+  catppuccinTheme: CatppuccinThemeId
   initTheme: () => void
   isDark: boolean
   isMobileMenuOpen: boolean
@@ -16,13 +29,12 @@ export interface SettingState extends BaseStore {
   isSidebarCollapsed: boolean
   language: string
   layoutMode: 'leftRight' | 'topBottom'
-  primaryColor: string
   resetToSystemTheme: () => void
+  setCatppuccinTheme: (theme: CatppuccinThemeId) => void
   setDarkMode: (isDark: boolean) => void
   setLanguage: (language: string) => void
   setLayoutMode: (mode: 'leftRight' | 'topBottom') => void
   setMobileMenuOpen: (open: boolean) => void
-  setPrimaryColor: (color: string) => void
   setSettingDrawerOpen: (open: boolean) => void
   setSidebarCollapsed: (collapsed: boolean) => void
   setThemeMode: (mode: 'light' | 'dark' | 'system') => void
@@ -40,7 +52,8 @@ export interface SettingState extends BaseStore {
 const getInitialThemeState = () => {
   // 尝试从 localStorage 获取持久化的 themeMode
   let themeMode: 'light' | 'dark' | 'system' = 'system'
-  let primaryColor = '#8200db'
+  // Catppuccin 默认主题
+  let catppuccinTheme: 'latte' | 'frappe' | 'macchiato' | 'mocha' = 'latte'
   let language = 'zh'
 
   if (typeof window !== 'undefined') {
@@ -49,15 +62,38 @@ const getInitialThemeState = () => {
       if (stored) {
         const parsed = JSON.parse(stored)
         themeMode = parsed.state?.themeMode || 'system'
-        primaryColor = parsed.state?.primaryColor || '#8200db'
         language = parsed.state?.language || 'zh'
+
+        // 降级兼容：如果有旧数据中的 primaryColor，尝试转换为对应的 catppuccinTheme
+        if (parsed.state?.catppuccinTheme) {
+          catppuccinTheme = parsed.state.catppuccinTheme
+        } else if (parsed.state?.primaryColor) {
+          // 查找匹配的主题（通过 Blue 颜色的值）
+          const theme = catppuccinThemes.find((t) =>
+            t.colors.find((c) => c.name === 'Blue' && c.value === parsed.state.primaryColor),
+          )
+          if (theme) {
+            catppuccinTheme = theme.id
+          }
+        }
       }
     } catch {
       // 忽略解析错误，使用默认值
     }
+
+    // 如果是跟随系统模式，需要根据系统偏好选择正确的默认主题
+    if (themeMode === 'system') {
+      const isDark = getSystemPrefersDark()
+      catppuccinTheme = isDark ? 'mocha' : 'latte'
+    }
   }
 
   const isDark = calculateIsDark(themeMode)
+
+  // 获取当前主题的 Blue 颜色值
+  const theme = getThemeById(catppuccinTheme)
+  const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+  const primaryColor = blueColor?.value || '#1e66f5'
 
   // 立即更新 DOM 属性，避免闪烁
   if (typeof document !== 'undefined') {
@@ -65,7 +101,7 @@ const getInitialThemeState = () => {
     updatePrimaryColorAttribute(primaryColor)
   }
 
-  return { isDark, language, primaryColor, themeMode }
+  return { catppuccinTheme, isDark, language, themeMode }
 }
 
 /**
@@ -80,6 +116,8 @@ export const useSettingStore = create<SettingState>()(
       const initialTheme = getInitialThemeState()
 
       return {
+        catppuccinTheme: initialTheme.catppuccinTheme,
+
         initTheme: () => {
           const { themeMode } = get()
           const isDark = calculateIsDark(themeMode)
@@ -99,23 +137,41 @@ export const useSettingStore = create<SettingState>()(
 
         layoutMode: 'leftRight' as const,
 
-        primaryColor: initialTheme.primaryColor,
-
         reset: () => {
           set({
+            catppuccinTheme: 'latte',
             isDark: false,
             isSidebarCollapsed: false,
             language: 'zh',
             layoutMode: 'leftRight' as const,
-            primaryColor: '#8200db',
             themeMode: 'system' as const,
           })
         },
 
         resetToSystemTheme: () => {
           const isDark = getSystemPrefersDark()
-          set({ isDark, themeMode: 'system' as const })
+          const newCatppuccinTheme = isDark ? 'mocha' : 'latte'
+          set({ catppuccinTheme: newCatppuccinTheme, isDark, themeMode: 'system' as const })
           updateThemeAttribute(isDark)
+
+          // 更新主色
+          const theme = getThemeById(newCatppuccinTheme)
+          const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+          const primaryColor = blueColor?.value || '#1e66f5'
+          updatePrimaryColorAttribute(primaryColor)
+        },
+
+        setCatppuccinTheme: (catppuccinTheme: CatppuccinThemeId) => {
+          const theme = getThemeById(catppuccinTheme)
+          const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+          const primaryColor = blueColor?.value || '#1e66f5'
+          // 联动更新 isDark 状态
+          const newIsDark = isDarkTheme(catppuccinTheme)
+          // 联动更新 themeMode：根据主题类型直接切换为 light 或 dark
+          const newThemeMode: 'light' | 'dark' = newIsDark ? 'dark' : 'light'
+          set({ catppuccinTheme, isDark: newIsDark, themeMode: newThemeMode })
+          updatePrimaryColorAttribute(primaryColor)
+          updateThemeAttribute(newIsDark)
         },
 
         setDarkMode: (isDark: boolean) => {
@@ -138,11 +194,6 @@ export const useSettingStore = create<SettingState>()(
           set({ isMobileMenuOpen: open })
         },
 
-        setPrimaryColor: (primaryColor: string) => {
-          set({ primaryColor })
-          updatePrimaryColorAttribute(primaryColor)
-        },
-
         setSettingDrawerOpen: (open: boolean) => {
           set({ isSettingDrawerOpen: open })
         },
@@ -153,8 +204,16 @@ export const useSettingStore = create<SettingState>()(
 
         setThemeMode: (themeMode: 'light' | 'dark' | 'system') => {
           const isDark = calculateIsDark(themeMode)
-          set({ isDark, themeMode })
+          // 亮色模式默认 latte，暗色模式默认 mocha
+          const newCatppuccinTheme = themeMode === 'dark' ? 'mocha' : 'latte'
+          set({ catppuccinTheme: newCatppuccinTheme, isDark, themeMode })
           updateThemeAttribute(isDark)
+
+          // 更新主色
+          const theme = getThemeById(newCatppuccinTheme)
+          const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+          const primaryColor = blueColor?.value || '#1e66f5'
+          updatePrimaryColorAttribute(primaryColor)
         },
 
         themeMode: initialTheme.themeMode,
@@ -163,8 +222,16 @@ export const useSettingStore = create<SettingState>()(
           const { isDark } = get()
           const newIsDark = !isDark
           const newThemeMode = newIsDark ? 'dark' : 'light'
-          set({ isDark: newIsDark, themeMode: newThemeMode })
+          // 切换时同步更新 catppuccinTheme
+          const newCatppuccinTheme = newIsDark ? 'mocha' : 'latte'
+          set({ catppuccinTheme: newCatppuccinTheme, isDark: newIsDark, themeMode: newThemeMode })
           updateThemeAttribute(newIsDark)
+
+          // 更新主色
+          const theme = getThemeById(newCatppuccinTheme)
+          const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+          const primaryColor = blueColor?.value || '#1e66f5'
+          updatePrimaryColorAttribute(primaryColor)
         },
 
         toggleLanguage: async () => {
@@ -190,9 +257,9 @@ export const useSettingStore = create<SettingState>()(
     {
       name: 'setting-store',
       partialize: (state) => ({
+        catppuccinTheme: state.catppuccinTheme,
         language: state.language,
         layoutMode: state.layoutMode,
-        primaryColor: state.primaryColor,
         themeMode: state.themeMode,
       }),
     },
@@ -206,8 +273,16 @@ if (typeof window !== 'undefined') {
     const store = useSettingStore.getState()
     if (store.themeMode === 'system') {
       const isDark = getSystemPrefersDark()
-      useSettingStore.setState({ isDark })
+      // 系统主题变化时，同步更新 catppuccinTheme
+      const newCatppuccinTheme = isDark ? 'mocha' : 'latte'
+      useSettingStore.setState({ catppuccinTheme: newCatppuccinTheme, isDark })
       updateThemeAttribute(isDark)
+
+      // 更新主色
+      const theme = getThemeById(newCatppuccinTheme)
+      const blueColor = theme?.colors.find((c) => c.name === 'Blue')
+      const primaryColor = blueColor?.value || '#1e66f5'
+      updatePrimaryColorAttribute(primaryColor)
     }
   }
 

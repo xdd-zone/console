@@ -6,6 +6,7 @@ import { Pattern } from '@/components/ui'
 import { LanguageButton } from '@/layout/atoms/LanguageButton'
 import { ThemeToggle } from '@/layout/atoms/ThemeToggle'
 import { useSettingStore } from '@/stores'
+import { getPrimaryColorByTheme } from '@/utils/theme'
 
 interface AuthContainerProps {
   children: ReactNode
@@ -15,7 +16,8 @@ interface AuthContainerProps {
  * 认证页面容器组件
  */
 export function AuthContainer({ children }: AuthContainerProps) {
-  const { isDark, primaryColor } = useSettingStore()
+  const { catppuccinTheme, isDark } = useSettingStore()
+  const primaryColor = getPrimaryColorByTheme(catppuccinTheme)
 
   return (
     <ConfigProvider

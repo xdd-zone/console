@@ -1,0 +1,73 @@
+/* 布局组件主题样式 - Catppuccin */
+
+/* ========== 侧边栏样式 ========== */
+.admin-layout-sider {
+  background: var(--catppuccin-bg-secondary);
+  border-right: 1px solid var(--catppuccin-border);
+}
+
+/* 侧边栏菜单项 */
+.admin-layout-sider .ant-menu {
+  background: transparent;
+  border-right: none;
+}
+
+.admin-layout-sider .ant-menu-item {
+  color: var(--catppuccin-text-secondary);
+  border-radius: 6px;
+  margin: 4px 8px;
+}
+
+.admin-layout-sider .ant-menu-item:hover {
+  color: var(--catppuccin-primary);
+  background: rgb(30 102 245 / 0.1);
+}
+
+.admin-layout-sider .ant-menu-item-selected {
+  color: var(--catppuccin-primary);
+  background: rgb(30 102 245 / 0.1);
+}
+
+.admin-layout-sider .ant-menu-item-selected::after {
+  border-right-color: var(--catppuccin-primary);
+}
+
+/* ========== 头部样式 ========== */
+.admin-layout-header {
+  background: var(--catppuccin-bg-secondary);
+  border-bottom: 1px solid var(--catppuccin-border);
+  color: var(--catppuccin-text-primary);
+}
+
+/* ========== 内容区域样式 ========== */
+.admin-layout-content {
+  background: var(--catppuccin-bg-primary);
+  color: var(--catppuccin-text-primary);
+}
+
+/* ========== 暗黑模式 ========== */
+[data-theme='dark'] .admin-layout-sider {
+  background: var(--catppuccin-bg-secondary);
+  border-right-color: var(--catppuccin-border);
+}
+
+[data-theme='dark'] .admin-layout-sider .ant-menu-item:hover {
+  color: var(--catppuccin-primary);
+  background: rgb(137 180 250 / 0.1);
+}
+
+[data-theme='dark'] .admin-layout-sider .ant-menu-item-selected {
+  color: var(--catppuccin-primary);
+  background: rgb(137 180 250 / 0.1);
+}
+
+[data-theme='dark'] .admin-layout-header {
+  background: var(--catppuccin-bg-secondary);
+  border-bottom-color: var(--catppuccin-border);
+  color: var(--catppuccin-text-primary);
+}
+
+[data-theme='dark'] .admin-layout-content {
+  background: var(--catppuccin-bg-primary);
+  color: var(--catppuccin-text-primary);
+}

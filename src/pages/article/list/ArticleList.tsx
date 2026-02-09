@@ -1,5 +1,6 @@
 import { Markdown } from '@/components/ui'
 import { useSettingStore } from '@/stores/modules/setting'
+import { getPrimaryColorByTheme } from '@/utils/theme'
 
 const text = `
 # Markdown 全量预览
@@ -119,7 +120,8 @@ pnpm -C apps/admin dev
  * 文章列表页面
  */
 export function ArticleList() {
-  const { primaryColor } = useSettingStore()
+  const { catppuccinTheme } = useSettingStore()
+  const primaryColor = getPrimaryColorByTheme(catppuccinTheme)
   return (
     <div className="p-4">
       <Markdown value={text} accentColor={primaryColor} />
