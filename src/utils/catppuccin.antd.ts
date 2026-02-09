@@ -8,7 +8,7 @@ import theme from 'antd/es/theme'
  * @returns Ant Design ThemeConfig
  */
 export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
-  const isDark = themeId === 'macchiato' || themeId === 'mocha'
+  const isDark = themeId === 'frappe' || themeId === 'macchiato' || themeId === 'mocha'
 
   const baseConfig = {
     components: {
@@ -53,18 +53,18 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
         colorBgElevated: '#e6e9ef',
         colorBgLayout: '#eff1f5',
         // 边框颜色
-        colorBorder: '#ccd0da',
+        colorBorder: '#dce0e8',
         colorBorderSecondary: '#e6e9ef',
         colorError: '#d20f39',
         colorErrorBg: '#eff1f5',
-        colorInfo: '#04a5e5',
+        colorInfo: '#179299',
         colorInfoBg: '#eff1f5',
         // 主色
         colorPrimary: '#1e66f5',
         colorPrimaryActive: '#1e66f5',
         colorPrimaryBg: '#eff1f5',
         colorPrimaryBgHover: '#e6e9ef',
-        colorPrimaryBorder: '#ccd0da',
+        colorPrimaryBorder: '#dce0e8',
         colorPrimaryBorderHover: '#1e66f5',
         colorPrimaryHover: '#1e66f5',
         colorPrimaryText: '#1e66f5',
@@ -83,51 +83,54 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
     }
   }
 
-  // Frappé（亮色主题）
+  // Frappe（暗色主题）
   if (themeId === 'frappe') {
     return {
       ...baseConfig,
-      algorithm: theme.defaultAlgorithm,
+      algorithm: theme.darkAlgorithm,
       components: {
         ...baseConfig.components,
         Button: {
           algorithm: true,
           colorPrimary: '#8caaee',
         },
+        Layout: {
+          colorBgBody: '#303446',
+          colorBgHeader: '#292c3c',
+        },
+        Menu: {
+          itemSelectedBg: '#292c3c',
+          subMenuItemBg: '#303446',
+        },
       },
       token: {
         ...baseConfig.token,
-        // 背景色
-        colorBgContainer: '#eff1f5',
-        colorBgElevated: '#e6e9ef',
-        colorBgLayout: '#eff1f5',
-        // 边框颜色
-        colorBorder: '#626483',
-        colorBorderSecondary: '#838cc7',
+        colorBgContainer: '#303446',
+        colorBgElevated: '#292c3c',
+        colorBgLayout: '#303446',
+        colorBorder: '#232634',
+        colorBorderSecondary: '#414559',
         colorError: '#e78284',
-        colorErrorBg: '#eff1f5',
-        colorInfo: '#99d1db',
-        colorInfoBg: '#eff1f5',
-        // 主色
+        colorErrorBg: '#303446',
+        colorInfo: '#81c8be',
+        colorInfoBg: '#303446',
         colorPrimary: '#8caaee',
         colorPrimaryActive: '#85c1dc',
-        colorPrimaryBg: '#eff1f5',
-        colorPrimaryBgHover: '#e6e9ef',
-        colorPrimaryBorder: '#626483',
+        colorPrimaryBg: '#303446',
+        colorPrimaryBgHover: '#292c3c',
+        colorPrimaryBorder: '#232634',
         colorPrimaryBorderHover: '#8caaee',
         colorPrimaryHover: '#8caaee',
         colorPrimaryText: '#8caaee',
         colorPrimaryTextHover: '#8caaee',
-        // 状态颜色
         colorSuccess: '#a6d189',
-        colorSuccessBg: '#eff1f5',
-        // 文字颜色
-        colorText: '#626483',
-        colorTextQuaternary: '#838cc7',
-        colorTextSecondary: '#6c7086',
-        colorTextTertiary: '#6c7086',
+        colorSuccessBg: '#303446',
+        colorText: '#c6d0f5',
+        colorTextQuaternary: '#737994',
+        colorTextSecondary: '#b5bfe2',
+        colorTextTertiary: '#a5adce',
         colorWarning: '#e5c890',
-        colorWarningBg: '#eff1f5',
+        colorWarningBg: '#303446',
       },
     }
   }
@@ -143,40 +146,43 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
           algorithm: true,
           colorPrimary: '#8aadf4',
         },
+        Layout: {
+          colorBgBody: '#24273a',
+          colorBgHeader: '#1e2030',
+        },
+        Menu: {
+          itemSelectedBg: '#1e2030',
+          subMenuItemBg: '#24273a',
+        },
       },
       token: {
         ...baseConfig.token,
-        // 背景色
-        colorBgContainer: '#1e1e2e',
-        colorBgElevated: '#181825',
-        colorBgLayout: '#1e1e2e',
-        // 边框颜色
-        colorBorder: '#494d64',
-        colorBorderSecondary: '#45475a',
+        colorBgContainer: '#24273a',
+        colorBgElevated: '#1e2030',
+        colorBgLayout: '#24273a',
+        colorBorder: '#181926',
+        colorBorderSecondary: '#363a4f',
         colorError: '#ed8796',
-        colorErrorBg: '#1e1e2e',
-        colorInfo: '#91d7e3',
-        colorInfoBg: '#1e1e2e',
-        // 主色
+        colorErrorBg: '#24273a',
+        colorInfo: '#8bd5ca',
+        colorInfoBg: '#24273a',
         colorPrimary: '#8aadf4',
         colorPrimaryActive: '#7dc4e4',
-        colorPrimaryBg: '#1e1e2e',
-        colorPrimaryBgHover: '#181825',
-        colorPrimaryBorder: '#494d64',
+        colorPrimaryBg: '#24273a',
+        colorPrimaryBgHover: '#1e2030',
+        colorPrimaryBorder: '#181926',
         colorPrimaryBorderHover: '#8aadf4',
         colorPrimaryHover: '#8aadf4',
         colorPrimaryText: '#8aadf4',
         colorPrimaryTextHover: '#8aadf4',
-        // 状态颜色
         colorSuccess: '#a6da95',
-        colorSuccessBg: '#1e1e2e',
-        // 文字颜色
-        colorText: '#585b70',
-        colorTextQuaternary: '#739ccc',
-        colorTextSecondary: '#6c7086',
-        colorTextTertiary: '#6c7086',
+        colorSuccessBg: '#24273a',
+        colorText: '#cad3f5',
+        colorTextQuaternary: '#6e738d',
+        colorTextSecondary: '#b8c0e0',
+        colorTextTertiary: '#a5adcb',
         colorWarning: '#eed49f',
-        colorWarningBg: '#1e1e2e',
+        colorWarningBg: '#24273a',
       },
     }
   }
@@ -203,7 +209,7 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
       colorBorderSecondary: '#313244',
       colorError: '#f38ba8',
       colorErrorBg: '#1e1e2e',
-      colorInfo: '#89dceb',
+      colorInfo: '#94e2d5',
       colorInfoBg: '#1e1e2e',
       // 主色
       colorPrimary: '#89b4fa',

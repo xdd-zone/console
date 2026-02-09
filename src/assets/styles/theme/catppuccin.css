@@ -1,11 +1,40 @@
 /* Catppuccin 主题配色系统 */
 
-/* ========== Frappé（亮色主题） ========== */
+/* ========== Latte（亮色主题 - 默认） ========== */
 :root {
   /* 基色系统 */
-  --catppuccin-frappe-base: #f2d5cf;
-  --catppuccin-frappe-mantle: #eebebe;
-  --catppuccin-frappe-crust: #626483;
+  --catppuccin-latte-base: #eff1f5;
+  --catppuccin-latte-mantle: #e6e9ef;
+  --catppuccin-latte-crust: #dce0e8;
+
+  /* 色彩系统 */
+  --catppuccin-latte-rosewater: #dc8a78;
+  --catppuccin-latte-flamingo: #dd7878;
+  --catppuccin-latte-pink: #ea76cb;
+  --catppuccin-latte-mauve: #8839ef;
+  --catppuccin-latte-red: #d20f39;
+  --catppuccin-latte-maroon: #e64553;
+  --catppuccin-latte-peach: #fe640b;
+  --catppuccin-latte-yellow: #df8e1d;
+  --catppuccin-latte-green: #40a02b;
+  --catppuccin-latte-teal: #179299;
+  --catppuccin-latte-sky: #04a5e5;
+  --catppuccin-latte-blue: #1e66f5;
+  --catppuccin-latte-sapphire: #209fb5;
+  --catppuccin-latte-lavender: #7287fd;
+
+  /* 文字颜色 */
+  --catppuccin-latte-text: #4c4f69;
+  --catppuccin-latte-text-secondary: #5c5f77;
+  --catppuccin-latte-text-muted: #8c8fa1;
+}
+
+/* ========== Frappé（暗色主题） ========== */
+[data-theme='frappe'] {
+  /* 基色系统 */
+  --catppuccin-frappe-base: #303446;
+  --catppuccin-frappe-mantle: #292c3c;
+  --catppuccin-frappe-crust: #232634;
 
   /* 色彩系统 */
   --catppuccin-frappe-rosewater: #f2d5cf;
@@ -24,46 +53,17 @@
   --catppuccin-frappe-lavender: #babbf1;
 
   /* 文字颜色 */
-  --catppuccin-frappe-text: #626483;
-  --catppuccin-frappe-text-secondary: #6c7086;
-  --catppuccin-frappe-text-muted: #838cc7;
-}
-
-/* ========== Latte（亮色主题） ========== */
-:root {
-  /* 基色系统 */
-  --catppuccin-latte-base: #eff1f5;
-  --catppuccin-latte-mantle: #e6e9ef;
-  --catppuccin-latte-crust: #ccd0da;
-
-  /* 色彩系统 */
-  --catppuccin-latte-rosewater: #dc8a78;
-  --catppuccin-latte-flamingo: #dd7878;
-  --catppuccin-latte-pink: #ea76cb;
-  --catppuccin-latte-mauve: #8839ef;
-  --catppuccin-latte-red: #d20f39;
-  --catppuccin-latte-maroon: #e02f6b;
-  --catppuccin-latte-peach: #fe640b;
-  --catppuccin-latte-yellow: #df8e1d;
-  --catppuccin-latte-green: #40a02b;
-  --catppuccin-latte-teal: #179299;
-  --catppuccin-latte-sky: #04a5e5;
-  --catppuccin-latte-blue: #1e66f5;
-  --catppuccin-latte-sapphire: #1e66f5;
-  --catppuccin-latte-lavender: #7287fd;
-
-  /* 文字颜色 */
-  --catppuccin-latte-text: #4c4f69;
-  --catppuccin-latte-text-secondary: #5c5f77;
-  --catppuccin-latte-text-muted: #8c8fa1;
+  --catppuccin-frappe-text: #c6d0f5;
+  --catppuccin-frappe-text-secondary: #b5bfe2;
+  --catppuccin-frappe-text-muted: #a5adce;
 }
 
 /* ========== Macchiato（暗色主题） ========== */
 [data-theme='macchiato'] {
   /* 基色系统 */
-  --catppuccin-macchiato-base: #181825;
-  --catppuccin-macchiato-mantle: #1e1e2e;
-  --catppuccin-macchiato-crust: #494d64;
+  --catppuccin-macchiato-base: #24273a;
+  --catppuccin-macchiato-mantle: #1e2030;
+  --catppuccin-macchiato-crust: #181926;
 
   /* 色彩系统 */
   --catppuccin-macchiato-rosewater: #f4dbd6;
@@ -82,9 +82,9 @@
   --catppuccin-macchiato-lavender: #b7bdf8;
 
   /* 文字颜色 */
-  --catppuccin-macchiato-text: #585b70;
-  --catppuccin-macchiato-text-secondary: #6c7086;
-  --catppuccin-macchiato-text-muted: #739ccc;
+  --catppuccin-macchiato-text: #cad3f5;
+  --catppuccin-macchiato-text-secondary: #b8c0e0;
+  --catppuccin-macchiato-text-muted: #a5adcb;
 }
 
 /* ========== Mocha（暗色主题） ========== */
@@ -92,7 +92,7 @@
   /* 基色系统 */
   --catppuccin-mocha-base: #1e1e2e;
   --catppuccin-mocha-mantle: #181825;
-  --catppuccin-mocha-crust: #45475a;
+  --catppuccin-mocha-crust: #11111b;
 
   /* 色彩系统 */
   --catppuccin-mocha-rosewater: #f5e0dc;

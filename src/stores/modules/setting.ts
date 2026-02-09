@@ -119,10 +119,10 @@ export const useSettingStore = create<SettingState>()(
         catppuccinTheme: initialTheme.catppuccinTheme,
 
         initTheme: () => {
-          const { themeMode } = get()
+          const { catppuccinTheme, themeMode } = get()
           const isDark = calculateIsDark(themeMode)
           set({ isDark })
-          updateThemeAttribute(initialTheme.catppuccinTheme)
+          updateThemeAttribute(catppuccinTheme)
         },
 
         isDark: initialTheme.isDark,

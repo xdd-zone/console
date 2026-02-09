@@ -104,5 +104,5 @@ export const getPrimaryColorByTheme = (themeId: string): string => {
  * 判断主题是否为暗色主题
  */
 export const isDarkTheme = (themeId: string): boolean => {
-  return ['macchiato', 'mocha'].includes(themeId)
+  return ['frappe', 'macchiato', 'mocha'].includes(themeId)
 }
