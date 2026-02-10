@@ -40,7 +40,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
       placement="right"
       onClose={onClose}
       open={open}
-      width={320}
+      size={'default'}
       classNames={{
         body: isDark ? 'bg-black-900' : '',
         footer: isDark ? 'bg-black-800 border-black-600' : '',
@@ -58,7 +58,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
         },
       }}
     >
-      <Space direction="vertical" size="large" style={{ width: '100%' }}>
+      <Space {...({ orientation: 'vertical', size: 'large' } as any)} style={{ width: '100%' }}>
         {/* 主题模式设置 */}
         <div>
           <Title level={5}>
@@ -71,7 +71,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
             {t('setting.themeModeDescription')}
           </Text>
           <div style={{ marginTop: 12 }}>
-            <Space direction="horizontal" style={{ width: '100%' }}>
+            <Space {...({ orientation: 'horizontal' } as any)} style={{ width: '100%' }}>
               <ResponsiveTooltip title={t('theme.lightMode')}>
                 <div
                   className={`hover:text-primary cursor-pointer text-2xl transition-colors ${themeMode === 'light' ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`}
@@ -155,7 +155,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
             {t('setting.layoutModeDescription')}
           </Text>
           <div style={{ marginTop: 12 }}>
-            <Space direction="horizontal" style={{ width: '100%' }}>
+            <Space {...({ orientation: 'horizontal' } as any)} style={{ width: '100%' }}>
               {/* 左右布局图标 */}
               <ResponsiveTooltip title={t('setting.leftRightLayout')}>
                 <div

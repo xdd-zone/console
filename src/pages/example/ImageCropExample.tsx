@@ -104,7 +104,7 @@ export function ImageCropExample() {
 
       {/* 控制面板 */}
       <Card title="控制面板" style={{ marginBottom: '24px' }}>
-        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+        <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
           {/* 裁剪模式控制 */}
           <div>
             <Text strong style={{ display: 'block', marginBottom: '8px' }}>

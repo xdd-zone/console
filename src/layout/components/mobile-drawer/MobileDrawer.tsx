@@ -24,7 +24,7 @@ export function MobileDrawer() {
       placement="left"
       open={isMobileMenuOpen}
       onClose={onClose}
-      width={264}
+      size={'default'}
       maskClosable
       classNames={{
         body: isDark ? 'bg-black-900' : '',
