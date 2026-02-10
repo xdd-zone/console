@@ -43,8 +43,8 @@ export const TocNav: FC<TocNavProps> = ({ activeId, items }): ReactElement | nul
           href={`#${it.id}`}
           className={clsx(
             'block truncate rounded px-2 py-1 transition-colors',
-            activeId === it.id ? 'text-primary! dark:text-primary!' : 'text-black/50! dark:text-white/60!',
-            'hover:text-primary! dark:hover:text-primary!',
+            activeId === it.id ? 'text-primary!' : 'text-[var(--color-text-secondary)]!',
+            'hover:text-primary!',
           )}
           style={{ paddingLeft: `${Math.max(0, it.level - 2) * 12}px` }}
         >
