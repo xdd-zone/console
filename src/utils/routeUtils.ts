@@ -1,9 +1,5 @@
 import type { MenuProps } from 'antd'
-import type { LucideProps } from 'lucide-react'
-import type { ComponentType } from 'react'
 import type { RouteObject } from 'react-router'
-
-import React from 'react'
 
 import type { RouteHandle } from '@/router/types'
 import type { Tab } from '@/stores'
@@ -11,25 +7,9 @@ import type { Tab } from '@/stores'
 import { router } from '@/router/router'
 import { RouteType } from '@/router/types'
 
+import { buildRoutePath, findRouteByPath, generateTabId, hasActualComponent, renderIcon } from './pathUtils'
+
 type MenuItem = Required<MenuProps>['items'][number]
-
-interface MenuItemWithOrder {
-  children?: MenuItemWithOrder[]
-  icon?: React.ReactNode
-  key: React.Key
-  label: React.ReactNode
-  order?: number
-}
-
-/**
- * 渲染图标组件
- * @param IconComponent 图标组件
- * @returns JSX 元素或 null
- */
-function renderIcon(IconComponent?: ComponentType<LucideProps>): React.ReactNode {
-  if (!IconComponent) return null
-  return React.createElement(IconComponent, { size: 16 })
-}
 
 /**
  * 从路由配置中生成 Antd Menu 数据结构
@@ -38,22 +18,9 @@ function renderIcon(IconComponent?: ComponentType<LucideProps>): React.ReactNode
  * @returns Antd Menu items 数组
  */
 export function generateAntdMenuItems(routes: RouteObject[], t?: (key: string) => string): MenuItem[] {
-  const menuItems: MenuItemWithOrder[] = []
-
-  function processRoute(route: RouteObject & { handle?: RouteHandle }, parentPath = ''): MenuItemWithOrder | null {
-    // 处理React Router处理后的路由对象
+  function processRoute(route: RouteObject & { handle?: RouteHandle }, parentPath = ''): MenuItem | null {
+    const fullPath = buildRoutePath(route.path || '', parentPath)
     const handle = route.handle as RouteHandle | undefined
-    const routePath = route.path || ''
-
-    // 构建完整路径
-    let fullPath = routePath
-    if (parentPath && routePath && !routePath.startsWith('/')) {
-      fullPath = `${parentPath}/${routePath}`.replace(/\/+/g, '/')
-    } else if (routePath.startsWith('/')) {
-      fullPath = routePath
-    } else if (parentPath) {
-      fullPath = parentPath
-    }
 
     // 只处理菜单类型的路由，默认为菜单类型
     const routeType = handle?.type || RouteType.MENU
@@ -66,10 +33,10 @@ export function generateAntdMenuItems(routes: RouteObject[], t?: (key: string) =
       return null
     }
 
-    // 处理子路由（先处理子路由，再决定是否显示父级）
-    let children: MenuItemWithOrder[] | undefined
+    // 处理子路由
+    let children: MenuItem[] | undefined
     if (route.children && route.children.length > 0) {
-      const childMenuItems: MenuItemWithOrder[] = []
+      const childMenuItems: MenuItem[] = []
 
       for (const childRoute of route.children) {
         const childMenuItem = processRoute(childRoute, fullPath)
@@ -81,8 +48,8 @@ export function generateAntdMenuItems(routes: RouteObject[], t?: (key: string) =
       if (childMenuItems.length > 0) {
         // 按 order 排序
         children = childMenuItems.sort((a, b) => {
-          const orderA = a.order || 999
-          const orderB = b.order || 999
+          const orderA = (a as { order?: number }).order || 999
+          const orderB = (b as { order?: number }).order || 999
           return orderA - orderB
         })
       } else {
@@ -92,16 +59,17 @@ export function generateAntdMenuItems(routes: RouteObject[], t?: (key: string) =
     }
 
     // 创建菜单项
-    const menuItem: MenuItemWithOrder = {
+    const menuItem: MenuItem = {
       children,
       icon: renderIcon(handle?.icon),
       key: fullPath,
       label: t ? t(handle.title) : handle.title,
-      order: handle.order || 999,
     }
 
     return menuItem
   }
+
+  const menuItems: MenuItem[] = []
 
   // 处理所有路由
   for (const route of routes) {
@@ -122,108 +90,11 @@ export function generateAntdMenuItems(routes: RouteObject[], t?: (key: string) =
   }
 
   // 按 order 排序并返回
-  const sortedItems = menuItems.sort((a, b) => {
-    const orderA = a.order || 999
-    const orderB = b.order || 999
+  return menuItems.sort((a, b) => {
+    const orderA = (a as { order?: number }).order || 999
+    const orderB = (b as { order?: number }).order || 999
     return orderA - orderB
   })
-
-  // 转换为 MenuItem 类型
-  return sortedItems.map((item) => ({
-    children: item.children?.map((child) => ({
-      children: child.children?.map((grandChild) => ({
-        children: grandChild.children,
-        icon: grandChild.icon,
-        key: grandChild.key,
-        label: grandChild.label,
-      })),
-      icon: child.icon,
-      key: child.key,
-      label: child.label,
-    })),
-    icon: item.icon,
-    key: item.key,
-    label: item.label,
-  }))
-}
-
-/**
- * 生成标签页ID
- * 基于路径生成唯一标识符
- */
-function generateTabId(path: string): string {
-  return path.replace(/\//g, '-').replace(/^-/, '') || 'home'
-}
-
-/**
- * 从路由配置中查找路由信息
- * @param routes 路由配置数组
- * @param targetPath 目标路径
- * @param parentPath 父路径
- * @returns 匹配的路由对象或null
- */
-function findRouteByPath(
-  routes: RouteObject[],
-  targetPath: string,
-  parentPath = '',
-): (RouteObject & { handle?: RouteHandle }) | null {
-  for (const route of routes) {
-    const routePath = route.path || ''
-
-    // 构建完整路径
-    let fullPath = routePath
-    if (parentPath && routePath && !routePath.startsWith('/')) {
-      fullPath = `${parentPath}/${routePath}`.replace(/\/+/g, '/')
-    } else if (routePath.startsWith('/')) {
-      fullPath = routePath
-    } else if (parentPath) {
-      fullPath = parentPath
-    }
-
-    // 检查是否匹配目标路径
-    if (fullPath === targetPath) {
-      return route as RouteObject & { handle?: RouteHandle }
-    }
-
-    // 递归查找子路由
-    if (route.children && route.children.length > 0) {
-      const childResult = findRouteByPath(route.children, targetPath, fullPath)
-      if (childResult) {
-        return childResult
-      }
-    }
-  }
-
-  return null
-}
-
-/**
- * 检查路由是否有实际的组件（不仅仅是重定向）
- * @param route 路由对象
- * @returns 是否有实际组件
- */
-function hasActualComponent(route: RouteObject): boolean {
-  // 如果有 Component 或 lazy 属性，说明有实际组件
-  if (route.Component || route.lazy) {
-    return true
-  }
-
-  // 如果有 element 且不是 Navigate 重定向，说明有实际组件
-  if (route.element) {
-    // 检查是否是 Navigate 组件（重定向）
-    const elementType = (route.element as React.ReactElement)?.type
-    if (typeof elementType === 'function' && elementType.name === 'Navigate') {
-      return false
-    }
-    return true
-  }
-
-  // 如果只有 index: true，通常是重定向路由
-  if (route.index === true) {
-    return false
-  }
-
-  return false
 }
 
 /**

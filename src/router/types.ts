@@ -1,5 +1,11 @@
+import type { MenuProps } from 'antd'
 import type { LucideProps } from 'lucide-react'
 import type { ComponentType } from 'react'
+
+/**
+ * 菜单项类型（从 Antd MenuProps 导出，供其他模块统一使用）
+ */
+export type MenuItem = Required<MenuProps>['items'][number]
 
 /**
  * 路由类型枚举

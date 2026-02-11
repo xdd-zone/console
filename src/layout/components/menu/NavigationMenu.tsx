@@ -4,11 +4,11 @@ import { ConfigProvider, Menu, theme } from 'antd'
 import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
-import { useSettingStore } from '@/stores'
-import { getPrimaryColorByTheme, hexToRgba } from '@/utils/theme'
+import type { MenuItem } from '@/utils/pathUtils'
 
-// 定义菜单项类型
-type MenuItem = Required<MenuProps>['items'][number]
+import { useSettingStore } from '@/stores'
+import { findMatchingMenuKey } from '@/utils/pathUtils'
+import { getPrimaryColorByTheme, hexToRgba } from '@/utils/theme'
 
 interface NavigationMenuProps {
   /** 自定义类名 */
@@ -25,35 +25,6 @@ interface NavigationMenuProps {
   onMenuClick?: (key: string) => void
   /** 自定义样式 */
   style?: React.CSSProperties
-}
-
-// 根据当前路径查找匹配的菜单项key
-function findMatchingMenuKey(items: MenuItem[], currentPath: string): string | null {
-  for (const item of items) {
-    if (!item) continue
-
-    const itemKey = String(item.key)
-
-    // 精确匹配
-    if (itemKey === currentPath) {
-      return itemKey
-    }
-
-    // 如果有子菜单，递归查找
-    if ('children' in item && item.children) {
-      const childMatch = findMatchingMenuKey(item.children, currentPath)
-      if (childMatch) {
-        return childMatch
-      }
-    }
-
-    // 路径前缀匹配（用于嵌套路由）
-    if (currentPath.startsWith(itemKey) && itemKey !== '/') {
-      return itemKey
-    }
-  }
-
-  return null
 }
 
 /**
