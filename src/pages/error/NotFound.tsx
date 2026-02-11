@@ -31,7 +31,7 @@ export function NotFound() {
           subTitle="抱歉，您访问的页面不存在"
           icon={<Search className="text-primary text-6xl" />}
           extra={
-            <Space direction="vertical" size="middle" className="w-full">
+            <Space orientation="vertical" size="middle" className="w-full">
               <Button type="primary" size="large" icon={<Home />} onClick={handleGoHome} className="w-full">
                 返回首页
               </Button>
@@ -40,7 +40,7 @@ export function NotFound() {
               </Button>
             </Space>
           }
-          className="rounded-lg bg-white/80 p-8 shadow-lg backdrop-blur-sm dark:bg-gray-800/80"
+          className="bg-cat-secondary/80 rounded-lg p-8 shadow-lg backdrop-blur-sm"
         />
       </div>
     </div>

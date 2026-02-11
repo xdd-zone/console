@@ -13,7 +13,7 @@ import { NavigationMenu } from '../menu/NavigationMenu'
  */
 export function MobileDrawer() {
   const { t } = useTranslation()
-  const { isDark, isMobileMenuOpen, setMobileMenuOpen } = useSettingStore()
+  const { isMobileMenuOpen, setMobileMenuOpen } = useSettingStore()
 
   const menuItems = generateAntdMenuItems(router.routes, t)
 
@@ -24,13 +24,13 @@ export function MobileDrawer() {
       placement="left"
       open={isMobileMenuOpen}
       onClose={onClose}
-      size={'default'}
-      maskClosable
+      size="default"
+      mask={{ closable: true }}
       classNames={{
-        body: isDark ? 'bg-black-900' : '',
-        header: isDark ? 'bg-black-800 border-black-600 text-white' : '',
-        mask: isDark ? 'bg-black/50' : 'bg-black/25',
-        wrapper: isDark ? 'text-white' : 'text-black-900',
+        body: 'bg-cat',
+        header: 'bg-cat-secondary border-cat text-cat',
+        mask: 'bg-black/50',
+        wrapper: 'text-cat',
       }}
       styles={{
         body: {
