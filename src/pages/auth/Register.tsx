@@ -23,8 +23,8 @@ export function Register() {
     <AuthContainer>
       {/* 标题 */}
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-2xl font-bold text-[var(--catppuccin-text-primary)]">{t('auth.registerTitle')}</h1>
-        <p className="text-[var(--catppuccin-text-secondary)]">{t('auth.createAccount')}</p>
+        <h1 className="text-cat mb-2 text-2xl font-bold">{t('auth.registerTitle')}</h1>
+        <p className="text-cat-muted">{t('auth.createAccount')}</p>
       </div>
 
       {/* 注册表单 */}
@@ -95,20 +95,20 @@ export function Register() {
 
       {/* 分割线 */}
       <Divider className="my-6">
-        <span className="text-sm text-[var(--catppuccin-text-muted)]">{t('auth.orSocialRegister')}</span>
+        <span className="text-cat-subtle text-sm">{t('auth.orSocialRegister')}</span>
       </Divider>
 
       {/* 社交登录按钮 */}
       <div className="flex gap-4">
         <Button
           icon={<AiFillWechat />}
-          className="h-12 flex-1 rounded-lg border-[var(--catppuccin-border)] bg-transparent text-[var(--catppuccin-text-secondary)] transition-colors hover:border-[#22c55e] hover:text-[#22c55e]"
+          className="border-cat text-cat-muted h-12 flex-1 rounded-lg bg-transparent transition-colors hover:border-green-500 hover:text-green-500"
         >
           {t('auth.wechatRegister')}
         </Button>
         <Button
           icon={<AiOutlineGoogle />}
-          className="h-12 flex-1 rounded-lg border-[var(--catppuccin-border)] bg-transparent text-[var(--catppuccin-text-secondary)] transition-colors hover:border-[#ef4444] hover:text-[#ef4444]"
+          className="border-cat text-cat-muted h-12 flex-1 rounded-lg bg-transparent transition-colors hover:border-red-500 hover:text-red-500"
         >
           {t('auth.googleRegister')}
         </Button>
@@ -116,11 +116,8 @@ export function Register() {
 
       {/* 登录链接 */}
       <div className="mt-6 text-center">
-        <span className="text-sm text-[var(--catppuccin-text-secondary)]">{t('auth.haveAccount')}</span>
-        <a
-          href="#"
-          className="ml-1 text-sm text-[var(--catppuccin-primary)] transition-colors hover:text-[var(--catppuccin-primary-hover)]"
-        >
+        <span className="text-cat-muted text-sm">{t('auth.haveAccount')}</span>
+        <a href="#" className="text-primary-cat hover:text-primary-hover ml-1 text-sm transition-colors">
           {t('auth.loginNow')}
         </a>
       </div>

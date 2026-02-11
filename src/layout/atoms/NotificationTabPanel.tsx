@@ -29,14 +29,11 @@ export function NotificationTabPanel({
     ) : (
       <div className="grow">
         {items.map((item) => (
-          <div
-            key={item.id}
-            className="flex cursor-pointer items-center rounded p-3 hover:bg-gray-100 dark:hover:bg-gray-600"
-          >
+          <div key={item.id} className="hover:bg-primary/10 flex cursor-pointer items-center rounded p-3">
             <div className="mr-4">{item.avatar ? <Avatar src={item.avatar} /> : item.icon}</div>
             <div className="flex flex-col">
-              <div className="text-sm text-gray-800 dark:text-white">{item.title}</div>
-              <div className="mt-1 text-xs text-gray-500">{item.datetime}</div>
+              <div className="text-cat text-sm">{item.title}</div>
+              <div className="text-cat-muted mt-1 text-xs">{item.datetime}</div>
             </div>
             {item.extra && <div className="ml-auto">{item.extra}</div>}
           </div>

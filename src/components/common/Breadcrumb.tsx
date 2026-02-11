@@ -37,10 +37,10 @@ export function Breadcrumb() {
       key: match.pathname,
       title: isLast ? (
         // 最后一项不可点击
-        <span className="text-gray-600 dark:text-gray-300">{t(title)}</span>
+        <span className="text-cat-muted">{t(title)}</span>
       ) : (
         // 中间项可点击
-        <Link to={match.pathname} className="transition-colors hover:text-blue-600">
+        <Link to={match.pathname} className="hover:text-primary transition-colors">
           {t(title)}
         </Link>
       ),

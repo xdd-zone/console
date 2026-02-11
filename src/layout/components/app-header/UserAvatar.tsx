@@ -26,7 +26,7 @@ export function UserAvatar() {
       key: 'user-info',
       label: (
         <div className="py-2">
-          <div className="font-medium text-gray-900 dark:text-white">Guest</div>
+          <div className="text-cat font-medium">Guest</div>
         </div>
       ),
     },

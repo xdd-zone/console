@@ -57,7 +57,7 @@ export const hexToRgba = (hex: string, alpha: number = 1): string => {
 /**
  * 将十六进制颜色转换为 HSL 值
  */
-export const hexToHsl = (hex: string): { h: number; l: number; s: number; } | null => {
+export const hexToHsl = (hex: string): { h: number; l: number; s: number } | null => {
   const rgb = hexToRgb(hex)
   if (!rgb) return null
 
@@ -174,14 +174,18 @@ export const updatePrimaryColorAttribute = (color: string) => {
     if (rgb) {
       const root = document.documentElement
 
-      // 设置基础颜色变量
+      // 设置基础颜色变量（用于向后兼容）
       root.style.setProperty('--primary-color', color)
       root.style.setProperty('--primary-color-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`)
 
-      // 动态生成并设置颜色 shades
+      // 动态生成并设置颜色 shades（供 TailwindCSS @theme 使用）
       const shades = generateColorShades(color)
       for (const [shade, shadeColor] of Object.entries(shades)) {
         root.style.setProperty(`--color-primary-${shade}`, shadeColor)
+        // 同时设置 950 shade
+        if (shade === '900') {
+          root.style.setProperty('--color-primary-950', mixColors(color, '#000000', 0.05))
+        }
       }
     }
   }

@@ -19,8 +19,7 @@ interface SettingDrawerProps {
  */
 export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
   const { t } = useTranslation()
-  const { catppuccinTheme, isDark, layoutMode, setCatppuccinTheme, setLayoutMode, setThemeMode, themeMode } =
-    useSettingStore()
+  const { catppuccinTheme, layoutMode, setCatppuccinTheme, setLayoutMode, setThemeMode, themeMode } = useSettingStore()
 
   const handleLayoutChange = (mode: 'leftRight' | 'topBottom') => {
     setLayoutMode(mode)
@@ -42,19 +41,19 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
       open={open}
       size={'default'}
       classNames={{
-        body: isDark ? 'bg-black-900' : '',
-        footer: isDark ? 'bg-black-800 border-black-600' : '',
-        header: isDark ? 'bg-black-800 border-black-600 text-white' : '',
-        mask: isDark ? 'bg-black/50' : 'bg-black/25',
-        wrapper: isDark ? 'text-white' : 'text-black-900',
+        body: 'bg-cat-secondary',
+        footer: 'bg-cat-tertiary border-cat',
+        header: 'bg-cat-tertiary border-cat text-cat',
+        mask: 'bg-black/50',
+        wrapper: 'text-cat',
       }}
       styles={{
         body: {
-          color: isDark ? '#ffffff' : '#000000',
+          color: 'var(--cat-text)',
         },
         header: {
-          borderBottom: `1px solid ${isDark ? '#4b5563' : '#e5e7eb'}`,
-          color: isDark ? '#ffffff' : '#000000',
+          borderBottom: '1px solid var(--cat-border)',
+          color: 'var(--cat-text)',
         },
       }}
     >

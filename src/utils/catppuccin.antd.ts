@@ -25,11 +25,9 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
       },
     },
     token: {
-      // 圆角
       borderRadius: 8,
       borderRadiusLG: 12,
       borderRadiusSM: 6,
-      // 字体
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     },
   }
@@ -72,11 +70,11 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
         // 状态颜色
         colorSuccess: '#40a02b',
         colorSuccessBg: '#eff1f5',
-        // 文字颜色
+        // 文字颜色 - 根据 Catppuccin 指南
         colorText: '#4c4f69',
-        colorTextQuaternary: '#acb0be',
+        colorTextQuaternary: '#8c8fa1',
         colorTextSecondary: '#5c5f77',
-        colorTextTertiary: '#8c8fa1',
+        colorTextTertiary: '#6c6f85',
         colorWarning: '#df8e1d',
         colorWarningBg: '#eff1f5',
       },
@@ -125,10 +123,11 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
         colorPrimaryTextHover: '#8caaee',
         colorSuccess: '#a6d189',
         colorSuccessBg: '#303446',
+        // 文字颜色
         colorText: '#c6d0f5',
-        colorTextQuaternary: '#737994',
+        colorTextQuaternary: '#a5adce',
         colorTextSecondary: '#b5bfe2',
-        colorTextTertiary: '#a5adce',
+        colorTextTertiary: '#8389a7',
         colorWarning: '#e5c890',
         colorWarningBg: '#303446',
       },
@@ -177,10 +176,11 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
         colorPrimaryTextHover: '#8aadf4',
         colorSuccess: '#a6da95',
         colorSuccessBg: '#24273a',
+        // 文字颜色
         colorText: '#cad3f5',
-        colorTextQuaternary: '#6e738d',
+        colorTextQuaternary: '#a5adcb',
         colorTextSecondary: '#b8c0e0',
-        colorTextTertiary: '#a5adcb',
+        colorTextTertiary: '#8a91b4',
         colorWarning: '#eed49f',
         colorWarningBg: '#24273a',
       },
@@ -224,11 +224,11 @@ export const getAntdThemeConfig = (themeId: string): ThemeConfig => {
       // 状态颜色
       colorSuccess: '#a6e3a1',
       colorSuccessBg: '#1e1e2e',
-      // 文字颜色
+      // 文字颜色 - 根据 Catppuccin 指南
       colorText: '#cdd6f4',
-      colorTextQuaternary: '#45475a',
+      colorTextQuaternary: '#a6adc8',
       colorTextSecondary: '#a6adc8',
-      colorTextTertiary: '#6c7086',
+      colorTextTertiary: '#9399b2',
       colorWarning: '#f9e2af',
       colorWarningBg: '#1e1e2e',
     },
