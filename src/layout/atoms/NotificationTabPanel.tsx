@@ -42,7 +42,7 @@ export function NotificationTabPanel({
     )
 
   return (
-    <div className="flex h-[300px] w-[300px] flex-col">
+    <div className="flex h-75 w-75 flex-col">
       <div className="grow overflow-auto">{content}</div>
       {showViewAll && (
         <div className="p-2">
