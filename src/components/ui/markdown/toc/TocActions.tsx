@@ -7,28 +7,28 @@ export const TocActions: FC = (): ReactElement => {
     <div className="mt-6 flex flex-col items-start gap-6">
       <button
         type="button"
-        className="cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] dark:text-white/60 dark:hover:text-white"
+        className="text-text-muted hover:text-primary cursor-pointer dark:text-white/60 dark:hover:text-white"
         aria-label="点赞"
       >
         <ThumbsUp size={20} />
       </button>
       <button
         type="button"
-        className="cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] dark:text-white/60 dark:hover:text-white"
+        className="text-text-muted hover:text-primary cursor-pointer dark:text-white/60 dark:hover:text-white"
         aria-label="转发"
       >
         <Share2 size={20} />
       </button>
       <button
         type="button"
-        className="cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] dark:text-white/60 dark:hover:text-white"
+        className="text-text-muted hover:text-primary cursor-pointer dark:text-white/60 dark:hover:text-white"
         aria-label="订阅"
       >
         <Bell size={20} />
       </button>
       <button
         type="button"
-        className="cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] dark:text-white/60 dark:hover:text-white"
+        className="text-text-muted hover:text-primary cursor-pointer dark:text-white/60 dark:hover:text-white"
         aria-label="评论"
       >
         <MessageSquare size={20} />

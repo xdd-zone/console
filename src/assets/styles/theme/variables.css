@@ -1,10 +1,12 @@
-/* 导入 Catppuccin 主题变量 */
+/* Catppuccin Theme Configuration for TailwindCSS v4 */
+
+/* Import Catppuccin color variables */
 @import './catppuccin.css';
 
-/* 配置 Tailwind CSS V4 主题色 */
+/* Configure TailwindCSS v4 Theme - Standard Color Mapping */
 @theme {
-  /* ========== Catppuccin 色彩系统 ========== */
-  /* 亮色主题色彩 */
+  /* ========== Catppuccin Color System ========== */
+  /* Latte (Light Theme - Default) */
   --color-rosewater: var(--cat-latte-rosewater);
   --color-flamingo: var(--cat-latte-flamingo);
   --color-pink: var(--cat-latte-pink);
@@ -20,34 +22,34 @@
   --color-sapphire: var(--cat-latte-sapphire);
   --color-lavender: var(--cat-latte-lavender);
 
-  /* ========== 语义化颜色 - 核心 UI 颜色 ========== */
-  /* 主色调 */
+  /* ========== Semantic Colors - Core UI Colors ========== */
+  /* Primary Colors */
   --color-primary: var(--cat-primary);
   --color-primary-hover: var(--cat-primary-hover);
   --color-primary-light: var(--cat-primary-light);
 
-  /* 背景色 - 三层背景层级 */
+  /* Background Colors - Three Layer Hierarchy */
   --color-bg: var(--cat-bg-primary);
   --color-bg-secondary: var(--cat-bg-secondary);
   --color-bg-tertiary: var(--cat-bg-tertiary);
   --color-bg-elevated: var(--cat-bg-elevated);
 
-  /* 边框色 */
+  /* Border Colors */
   --color-border: var(--cat-border);
   --color-border-subtle: var(--cat-border-subtle);
 
-  /* 文字色 - 三层层级 */
+  /* Text Colors - Three Layer Hierarchy */
   --color-text: var(--cat-text);
   --color-text-muted: var(--cat-text-muted);
   --color-text-subtle: var(--cat-text-subtle);
 
-  /* 状态语义色 */
+  /* Status Semantic Colors */
   --color-success: var(--cat-success);
   --color-warning: var(--cat-warning);
   --color-error: var(--cat-error);
   --color-info: var(--cat-info);
 
-  /* ========== Primary 颜色 shades ========== */
+  /* Primary Colors Shades */
   --color-primary-50: var(--color-primary-50);
   --color-primary-100: var(--color-primary-100);
   --color-primary-200: var(--color-primary-200);
@@ -61,12 +63,14 @@
   --color-primary-950: var(--color-primary-950);
 }
 
-/* ========== 深色模式变体配置 ========== */
+/* Dark Mode Variant Configuration */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
-/* ========== 主题切换时的颜色覆盖 ========== */
-/* Frappé 主题 */
+/* Theme Switching Overrides */
+
+/* Frappé Theme */
 [data-theme='frappe'] {
+  /* Base Colors Override */
   --color-rosewater: var(--cat-frappe-rosewater);
   --color-flamingo: var(--cat-frappe-flamingo);
   --color-pink: var(--cat-frappe-pink);
@@ -82,7 +86,7 @@
   --color-sapphire: var(--cat-frappe-sapphire);
   --color-lavender: var(--cat-frappe-lavender);
 
-  /* 语义色覆盖 */
+  /* Semantic Color Overrides */
   --color-primary: var(--cat-primary);
   --color-primary-hover: var(--cat-primary-hover);
   --color-primary-light: var(--cat-primary-light);
@@ -105,8 +109,9 @@
   --color-info: var(--cat-info);
 }
 
-/* Macchiato 主题 */
+/* Macchiato Theme */
 [data-theme='macchiato'] {
+  /* Base Colors Override */
   --color-rosewater: var(--cat-macchiato-rosewater);
   --color-flamingo: var(--cat-macchiato-flamingo);
   --color-pink: var(--cat-macchiato-pink);
@@ -122,7 +127,7 @@
   --color-sapphire: var(--cat-macchiato-sapphire);
   --color-lavender: var(--cat-macchiato-lavender);
 
-  /* 语义色覆盖 */
+  /* Semantic Color Overrides */
   --color-primary: var(--cat-primary);
   --color-primary-hover: var(--cat-primary-hover);
   --color-primary-light: var(--cat-primary-light);
@@ -145,8 +150,9 @@
   --color-info: var(--cat-info);
 }
 
-/* Mocha 主题 */
+/* Mocha Theme */
 [data-theme='mocha'] {
+  /* Base Colors Override */
   --color-rosewater: var(--cat-mocha-rosewater);
   --color-flamingo: var(--cat-mocha-flamingo);
   --color-pink: var(--cat-mocha-pink);
@@ -162,7 +168,7 @@
   --color-sapphire: var(--cat-mocha-sapphire);
   --color-lavender: var(--cat-mocha-lavender);
 
-  /* 语义色覆盖 */
+  /* Semantic Color Overrides */
   --color-primary: var(--cat-primary);
   --color-primary-hover: var(--cat-primary-hover);
   --color-primary-light: var(--cat-primary-light);
@@ -185,55 +191,145 @@
   --color-info: var(--cat-info);
 }
 
-/* ========== 便利的 TailwindCSS 类名快捷方式 ========== */
-.text-cat {
-  color: var(--cat-text);
+/* ========== TailwindCSS Standard Color Mapping ========== */
+/* Override TailwindCSS default colors with Catppuccin palette */
+
+/* Gray Scale Mapping - Using Catppuccin text colors */
+[data-theme='latte'] {
+  --color-gray-50: #f8f9fb;
+  --color-gray-100: #eff1f5;
+  --color-gray-200: #e6e9ef;
+  --color-gray-300: #dce0e8;
+  --color-gray-400: #8c8fa1;
+  --color-gray-500: #6c6f85;
+  --color-gray-600: #4c4f69;
+  --color-gray-700: #4c4f69;
+  --color-gray-800: #4c4f69;
+  --color-gray-900: #4c4f69;
+  --color-gray-950: #1e1e2e;
 }
 
-.text-cat-muted {
-  color: var(--cat-text-muted);
+[data-theme='frappe'] {
+  --color-gray-50: #4c4f69;
+  --color-gray-100: #4c4f69;
+  --color-gray-200: #4c4f69;
+  --color-gray-300: #4c4f69;
+  --color-gray-400: #a5adce;
+  --color-gray-500: #8389a7;
+  --color-gray-600: #c6d0f5;
+  --color-gray-700: #c6d0f5;
+  --color-gray-800: #c6d0f5;
+  --color-gray-900: #c6d0f5;
+  --color-gray-950: #232634;
 }
 
-.text-cat-subtle {
-  color: var(--cat-text-subtle);
+[data-theme='macchiato'] {
+  --color-gray-50: #4c4f69;
+  --color-gray-100: #4c4f69;
+  --color-gray-200: #4c4f69;
+  --color-gray-300: #4c4f69;
+  --color-gray-400: #a5adcb;
+  --color-gray-500: #8a91b4;
+  --color-gray-600: #cad3f5;
+  --color-gray-700: #cad3f5;
+  --color-gray-800: #cad3f5;
+  --color-gray-900: #cad3f5;
+  --color-gray-950: #181926;
 }
 
-.bg-cat {
-  background-color: var(--cat-bg-primary);
+[data-theme='mocha'] {
+  --color-gray-50: #4c4f69;
+  --color-gray-100: #4c4f69;
+  --color-gray-200: #4c4f69;
+  --color-gray-300: #4c4f69;
+  --color-gray-400: #a6adc8;
+  --color-gray-500: #9399b2;
+  --color-gray-600: #cdd6f4;
+  --color-gray-700: #cdd6f4;
+  --color-gray-800: #cdd6f4;
+  --color-gray-900: #cdd6f4;
+  --color-gray-950: #11111b;
 }
 
-.bg-cat-secondary {
-  background-color: var(--cat-bg-secondary);
+/* Text Colors - Override TailwindCSS muted class */
+[data-theme='latte'] {
+  --color-muted: var(--cat-latte-text-muted);
+  --color-muted-foreground: var(--cat-latte-text-muted);
 }
 
-.bg-cat-tertiary {
-  background-color: var(--cat-bg-tertiary);
+[data-theme='frappe'] {
+  --color-muted: var(--cat-frappe-text-muted);
+  --color-muted-foreground: var(--cat-frappe-text-muted);
 }
 
-.bg-cat-elevated {
-  background-color: var(--cat-bg-elevated);
+[data-theme='macchiato'] {
+  --color-muted: var(--cat-macchiato-text-muted);
+  --color-muted-foreground: var(--cat-macchiato-text-muted);
 }
 
-.border-cat {
-  border-color: var(--cat-border);
+[data-theme='mocha'] {
+  --color-muted: var(--cat-mocha-text-muted);
+  --color-muted-foreground: var(--cat-mocha-text-muted);
 }
 
-.border-cat-subtle {
-  border-color: var(--cat-border-subtle);
+/* Background Colors - Override TailwindCSS background classes */
+[data-theme='latte'] {
+  --color-background: var(--cat-latte-base);
+  --color-foreground: var(--cat-latte-text);
+  --color-card: var(--cat-latte-base);
+  --color-card-foreground: var(--cat-latte-text);
+  --color-popover: var(--cat-latte-base);
+  --color-popover-foreground: var(--cat-latte-text);
 }
 
-.text-primary-cat {
-  color: var(--cat-primary);
+[data-theme='frappe'] {
+  --color-background: var(--cat-frappe-base);
+  --color-foreground: var(--cat-frappe-text);
+  --color-card: var(--cat-frappe-base);
+  --color-card-foreground: var(--cat-frappe-text);
+  --color-popover: var(--cat-frappe-base);
+  --color-popover-foreground: var(--cat-frappe-text);
 }
 
-.bg-primary-cat {
-  background-color: var(--cat-primary);
+[data-theme='macchiato'] {
+  --color-background: var(--cat-macchiato-base);
+  --color-foreground: var(--cat-macchiato-text);
+  --color-card: var(--cat-macchiato-base);
+  --color-card-foreground: var(--cat-macchiato-text);
+  --color-popover: var(--cat-macchiato-base);
+  --color-popover-foreground: var(--cat-macchiato-text);
 }
 
-.hover\:text-primary-cat:hover {
-  color: var(--cat-primary-hover);
+[data-theme='mocha'] {
+  --color-background: var(--cat-mocha-base);
+  --color-foreground: var(--cat-mocha-text);
+  --color-card: var(--cat-mocha-base);
+  --color-card-foreground: var(--cat-mocha-text);
+  --color-popover: var(--cat-mocha-base);
+  --color-popover-foreground: var(--cat-mocha-text);
 }
 
-.hover\:bg-primary-cat:hover {
-  background-color: var(--cat-primary-hover);
+/* Border Colors */
+[data-theme='latte'] {
+  --color-border: var(--cat-latte-crust);
+  --color-input: var(--cat-latte-crust);
+  --color-ring: var(--cat-latte-blue);
+}
+
+[data-theme='frappe'] {
+  --color-border: var(--cat-frappe-crust);
+  --color-input: var(--cat-frappe-crust);
+  --color-ring: var(--cat-frappe-blue);
+}
+
+[data-theme='macchiato'] {
+  --color-border: var(--cat-macchiato-crust);
+  --color-input: var(--cat-macchiato-crust);
+  --color-ring: var(--cat-macchiato-blue);
+}
+
+[data-theme='mocha'] {
+  --color-border: var(--cat-mocha-crust);
+  --color-input: var(--cat-mocha-crust);
+  --color-ring: var(--cat-mocha-blue);
 }

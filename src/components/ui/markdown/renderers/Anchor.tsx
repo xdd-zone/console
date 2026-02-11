@@ -19,7 +19,6 @@ export const Anchor: FC<JSX.IntrinsicElements['a']> = ({ children, className, hr
       target={isExternal ? '_blank' : rest.target}
       rel={isExternal ? 'noopener noreferrer' : rest.rel}
       className={clsx(theme.anchor.a, className)}
-      style={{ color: 'var(--primary-color)' }}
     >
       {children}
     </a>

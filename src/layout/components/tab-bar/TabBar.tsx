@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router'
 import { useMobile } from '@/hooks/useMobile'
 import { useTabBarStore } from '@/stores'
 
+import { clsx } from 'clsx'
+
 /**
  * 标签栏组件
  * 显示当前打开的页面标签，支持切换和关闭
@@ -26,40 +28,30 @@ export function TabBar() {
 
   // 处理标签页关闭
   const handleTabClose = (e: React.MouseEvent, tabId: string) => {
-    e.stopPropagation() // 阻止事件冒泡，避免触发标签页点击
+    e.stopPropagation()
 
-    // 获取当前要关闭的标签页
     const tabToClose = tabs.find((tab) => tab.id === tabId)
     if (!tabToClose || tabToClose.closable === false) {
       return
     }
 
-    // 如果关闭的是当前激活的标签页，需要先跳转到其他标签页
     if (activeTabId === tabId) {
-      // 找到关闭后应该激活的标签页
       const currentIndex = tabs.findIndex((tab) => tab.id === tabId)
       let targetTab = null
 
-      // 优先激活右侧标签页
       if (currentIndex < tabs.length - 1) {
         targetTab = tabs[currentIndex + 1]
-      }
-      // 如果没有右侧标签页，激活左侧标签页
-      else if (currentIndex > 0) {
+      } else if (currentIndex > 0) {
         targetTab = tabs[currentIndex - 1]
-      }
-      // 如果只有一个标签页，跳转到首页
-      else {
+      } else {
         targetTab = tabs.find((tab) => tab.path === '/dashboard')
       }
 
-      // 先跳转路由，再关闭标签
       if (targetTab) {
         navigate(targetTab.path)
       }
     }
 
-    // 关闭标签页
     closeTab(tabId)
   }
 
@@ -108,12 +100,10 @@ export function TabBar() {
     const container = scrollContainerRef.current
     if (!container) return
 
-    // 桌面端滚轮事件
     if (!isMobile) {
       container.addEventListener('wheel', handleWheel, { passive: false })
     }
 
-    // 移动端触摸事件
     if (isMobile) {
       container.addEventListener('touchstart', handleTouchStart, { passive: true })
       container.addEventListener('touchmove', handleTouchMove, { passive: false })
@@ -133,32 +123,35 @@ export function TabBar() {
   }, [isMobile])
 
   return (
-    <div className="guide-tab-bar border-cat border-b p-1 md:p-2">
+    <div className="guide-tab-bar border border-b p-1 md:p-2">
       <div className="flex items-center justify-between">
-        {/* 标签区域 */}
         <div
           ref={scrollContainerRef}
           className="scrollbar-hide flex flex-1 items-center space-x-1 overflow-x-hidden"
           style={{
-            msOverflowStyle: 'none', // IE/Edge
-            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none',
           }}
         >
           {tabs.map((tab) => (
             <div
               key={tab.id}
               onClick={() => handleTabClick(tab.id, tab.path)}
-              className={`tab-item flex cursor-pointer items-center space-x-2 rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition-all select-none ${
-                activeTabId === tab.id ? 'active' : ''
-              } `}
+              className={clsx(
+                'flex cursor-pointer items-center space-x-2 rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition-all select-none',
+                activeTabId === tab.id
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'text-text-muted hover:bg-bg-secondary hover:text-text border-transparent',
+              )}
             >
               <span>{t(tab.label)}</span>
               {tab.closable !== false && (
                 <div
                   onClick={(e) => handleTabClose(e, tab.id)}
-                  className={`cursor-pointer rounded-sm p-0.5 transition-colors ${
-                    activeTabId === tab.id ? 'text-primary hover:bg-primary/20' : 'text-cat-muted hover:text-cat'
-                  }`}
+                  className={clsx(
+                    'cursor-pointer rounded-sm p-0.5 transition-colors',
+                    activeTabId === tab.id ? 'hover:bg-primary/20' : 'hover:text-primary',
+                  )}
                 >
                   <X size={16} />
                 </div>

@@ -29,12 +29,7 @@ const createHeading = (level: 1 | 2 | 3 | 4 | 5 | 6) => {
     }
 
     const anchor = id ? (
-      <a
-        href={`#${id}`}
-        className={clsx(theme.heading.anchor)}
-        aria-label="Anchor"
-        style={{ color: 'var(--primary-color)' }}
-      >
+      <a href={`#${id}`} className={clsx(theme.heading.anchor)} aria-label="Anchor">
         #
       </a>
     ) : null
