@@ -10,16 +10,28 @@ import {
   transformerNotationWordHighlight,
 } from '@shikijs/transformers'
 import { createHighlighterCoreSync, createJavaScriptRegexEngine } from 'shiki'
+import catppuccinFrappe from 'shiki/themes/catppuccin-frappe.mjs'
 import catppuccinLatte from 'shiki/themes/catppuccin-latte.mjs'
+import catppuccinMacchiato from 'shiki/themes/catppuccin-macchiato.mjs'
 import catppuccinMocha from 'shiki/themes/catppuccin-mocha.mjs'
 
 export * from './helpers'
 
 /**
+ * Catppuccin 主题到 Shiki 主题的映射
+ */
+export const CATPUCCIN_TO_SHIKI_THEME: Record<string, string> = {
+  frappe: 'catppuccin-frappe',
+  latte: 'catppuccin-latte',
+  macchiato: 'catppuccin-macchiato',
+  mocha: 'catppuccin-mocha',
+}
+
+/**
  * 在浏览器端创建 Shiki 高亮器核心：
  * - SSR 环境（无 window）返回 null
  * - 使用 JavaScript 正则引擎
- * - 预加载 Catppuccin 深浅主题
+ * - 预加载所有 4 个 Catppuccin 主题
  */
 let singleton: HighlighterCore | null = null
 
@@ -31,7 +43,11 @@ export const createClientHighlighter = (): HighlighterCore | null => {
   if (cached) return cached
   if (singleton) return singleton
   const engine = createJavaScriptRegexEngine()
-  singleton = createHighlighterCoreSync({ engine, langs: [], themes: [catppuccinMocha, catppuccinLatte] })
+  singleton = createHighlighterCoreSync({
+    engine,
+    langs: [],
+    themes: [catppuccinMocha, catppuccinLatte, catppuccinFrappe, catppuccinMacchiato],
+  })
   store[key] = singleton
   return singleton
 }
@@ -68,13 +84,15 @@ export const ensureLanguageLoaded = async (highlighter: HighlighterCore, lang: s
 
 /**
  * 将代码转换为带有主题与标注的 HTML 字符串：
- * - 支持暗/亮主题切换（catppuccin-mocha / catppuccin-latte）
+ * - 支持根据 Catppuccin 主题 ID 选择对应的高亮主题
  * - 支持 diff、高亮、单词高亮、行高亮等标注
  */
 export const codeToHtml = (
   highlighter: HighlighterCore,
-  { attrs, code, lang, mode }: { attrs?: string; code: string; lang: string; mode?: 'dark' | 'light' },
+  { attrs, code, lang, themeId }: { attrs?: string; code: string; lang: string; themeId?: string },
 ) => {
+  const shikiTheme = themeId ? (CATPUCCIN_TO_SHIKI_THEME[themeId] ?? 'catppuccin-latte') : 'catppuccin-latte'
+
   const common = {
     lang,
     meta: { __raw: attrs ?? '' },
@@ -86,15 +104,10 @@ export const codeToHtml = (
     ],
   } satisfies Pick<CodeToHastOptions<BundledLanguage, BundledTheme>, 'lang' | 'meta' | 'transformers'>
 
-  const options: CodeToHastOptions<BundledLanguage, BundledTheme> = mode
-    ? {
-        ...common,
-        theme: mode === 'dark' ? 'catppuccin-mocha' : 'catppuccin-latte',
-      }
-    : {
-        ...common,
-        themes: { dark: 'catppuccin-mocha', light: 'catppuccin-latte' },
-      }
+  const options: CodeToHastOptions<BundledLanguage, BundledTheme> = {
+    ...common,
+    theme: shikiTheme,
+  }
 
   return highlighter.codeToHtml(code, options)
 }

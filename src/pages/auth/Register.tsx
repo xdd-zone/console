@@ -28,7 +28,7 @@ export function Register() {
       </div>
 
       {/* 注册表单 */}
-      <Form form={form} name="register" layout="vertical" size="large" className="space-y-4">
+      <Form form={form} name="register" layout="vertical" size="large" className="gap-y-4">
         <Form.Item
           label={t('auth.username')}
           name="username"

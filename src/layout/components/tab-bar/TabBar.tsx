@@ -1,3 +1,4 @@
+import { clsx } from 'clsx'
 import { X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -5,8 +6,6 @@ import { useNavigate } from 'react-router'
 
 import { useMobile } from '@/hooks/useMobile'
 import { useTabBarStore } from '@/stores'
-
-import { clsx } from 'clsx'
 
 /**
  * 标签栏组件
@@ -123,11 +122,11 @@ export function TabBar() {
   }, [isMobile])
 
   return (
-    <div className="guide-tab-bar border border-b p-1 md:p-2">
+    <div className="guide-tab-bar border-b border-gray-500 p-1 md:p-2">
       <div className="flex items-center justify-between">
         <div
           ref={scrollContainerRef}
-          className="scrollbar-hide flex flex-1 items-center space-x-1 overflow-x-hidden"
+          className="scrollbar-hide flex flex-1 items-center gap-x-1 overflow-x-hidden"
           style={{
             msOverflowStyle: 'none',
             scrollbarWidth: 'none',
@@ -138,7 +137,7 @@ export function TabBar() {
               key={tab.id}
               onClick={() => handleTabClick(tab.id, tab.path)}
               className={clsx(
-                'flex cursor-pointer items-center space-x-2 rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition-all select-none',
+                'flex cursor-pointer items-center gap-x-2 rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition-all select-none',
                 activeTabId === tab.id
                   ? 'border-primary bg-primary/10 text-primary'
                   : 'text-text-muted hover:bg-bg-secondary hover:text-text border-transparent',

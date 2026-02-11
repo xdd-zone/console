@@ -24,12 +24,12 @@ export const Toc: FC<TocProps> = ({ className, containerRef, maxLevel = 6, minLe
         <div className="relative">
           <TocNav items={items} activeId={activeId} />
         </div>
-        <div className="border-subtle/10 mt-3 border-t pt-3 dark:border-white/10">
+        <div className="border-subtle mt-3 border-t pt-3">
           <TocProgress progress={progress} />
           <button
             type="button"
             onClick={scrollToTop}
-            className="text-text-muted/60 hover:text-primary mt-3 flex cursor-pointer items-center gap-1 text-xs dark:text-white/60 dark:hover:text-white"
+            className="text-text-muted/60 hover:text-primary mt-3 flex cursor-pointer items-center gap-1 text-xs"
             aria-label="返回顶部"
           >
             <ArrowUp size={14} />

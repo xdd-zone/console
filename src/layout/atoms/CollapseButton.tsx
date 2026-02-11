@@ -12,7 +12,7 @@ export function CollapseButton() {
   return (
     <button
       onClick={toggleSidebarCollapsed}
-      className={`hover:text-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded text-gray-600 transition-colors dark:text-white ${
+      className={`hover:text-primary text-text flex h-8 w-8 cursor-pointer items-center justify-center rounded transition-colors ${
         isSidebarCollapsed ? '' : 'rotate-180'
       }`}
     >

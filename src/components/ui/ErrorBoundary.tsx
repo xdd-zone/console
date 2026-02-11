@@ -97,8 +97,8 @@ export function ErrorBoundary() {
       `}</style>
       <div className="relative flex h-screen w-full flex-col items-center justify-center">
         <div className="glitch">500</div>
-        <h1 className="mt-4 text-3xl font-bold text-gray-900 dark:text-gray-100">应用发生错误</h1>
-        <p className="mt-2 text-center text-gray-600 dark:text-gray-400">{errorMessage}</p>
+        <h1 className="text-text mt-4 text-3xl font-bold">应用发生错误</h1>
+        <p className="text-text-muted mt-2 text-center">{errorMessage}</p>
         <button
           type="button"
           onClick={() => (window.location.href = '/')}

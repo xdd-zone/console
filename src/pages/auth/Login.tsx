@@ -19,7 +19,7 @@ export function Login() {
       </div>
 
       {/* 登录表单 */}
-      <Form name="login" layout="vertical" size="large" className="space-y-4">
+      <Form name="login" layout="vertical" size="large" className="gap-y-4">
         <Form.Item
           label={t('auth.username')}
           name="username"

@@ -29,7 +29,7 @@ export const TocNav: FC<TocNavProps> = ({ activeId, items }): ReactElement | nul
   if (items.length === 0) return null
 
   return (
-    <nav className="scrollbar-hide h-64 space-y-1 overflow-y-auto pr-1">
+    <nav className="scrollbar-hide flex h-64 flex-col gap-y-2 overflow-y-auto pr-1">
       {items.map((it, idx) => (
         <a
           key={`${it.id}-${idx}`}
@@ -42,7 +42,7 @@ export const TocNav: FC<TocNavProps> = ({ activeId, items }): ReactElement | nul
           }}
           href={`#${it.id}`}
           className={clsx(
-            'block truncate rounded px-2 py-1 transition-colors',
+            'block rounded px-2 py-1 transition-colors',
             activeId === it.id ? 'text-primary!' : 'text-text-muted!',
             'hover:text-primary!',
           )}

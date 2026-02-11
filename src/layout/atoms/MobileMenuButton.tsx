@@ -16,7 +16,7 @@ export function MobileMenuButton() {
   return (
     <button
       onClick={openDrawer}
-      className="hover:text-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded text-gray-600 transition-colors dark:text-white"
+      className="hover:text-primary text-text flex h-8 w-8 cursor-pointer items-center justify-center rounded transition-colors"
       aria-label={t('tooltip.openMenu')}
     >
       <Menu size={20} />

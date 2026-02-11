@@ -46,8 +46,8 @@ export const defaultMarkdownTheme: MarkdownTheme = {
   // 列表：一致缩进与行高
   list: {
     li: 'leading-7 text-text',
-    ol: 'my-3 list-decimal space-y-1 pl-6 text-text',
-    ul: 'my-3 list-disc space-y-1 pl-6 text-text',
+    ol: 'my-3 list-decimal flex flex-col gap-1 pl-6 text-text',
+    ul: 'my-3 list-disc flex flex-col gap-1 pl-6 text-text',
   },
   // 段落：基础行高
   paragraph: {

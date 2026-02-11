@@ -39,7 +39,7 @@ const LangIcon: FC<{ lang: string }> = ({ lang }) => {
 export const CodeBlock: FC<PreProps> = ({ children, className }) => {
   const highlighter = useHighlighter()
   const [html, setHtml] = useState<string>('')
-  const { isDark } = useSettingStore()
+  const { catppuccinTheme } = useSettingStore()
   const theme = useMarkdownTheme()
   const [copied, setCopied] = useState<boolean>(false)
 
@@ -62,14 +62,14 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
       try {
         await ensureLanguageLoaded(highlighter, lang)
       } catch {}
-      const htmlText = codeToHtml(highlighter, { code, lang, mode: isDark ? 'dark' : 'light' })
+      const htmlText = codeToHtml(highlighter, { code, lang, themeId: catppuccinTheme })
       if (!disposed) setHtml(htmlText)
     }
     run()
     return () => {
       disposed = true
     }
-  }, [code, highlighter, language, isDark])
+  }, [code, highlighter, language, catppuccinTheme])
 
   useEffect(() => {
     if (!copied) return
@@ -89,7 +89,7 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
       <div
         className={clsx(
           'code-lang-badge absolute right-2 bottom-2 flex items-center gap-1 rounded-md px-2 py-1 text-xs',
-          isDark ? 'text-white' : 'text-gray-900',
+          'text-text',
         )}
       >
         <LangIcon lang={language} />

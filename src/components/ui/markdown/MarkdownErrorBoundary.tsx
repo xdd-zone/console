@@ -16,12 +16,12 @@ interface State {
 const defaultFallback = (
   <div className="flex flex-col items-center justify-center p-8 text-center">
     <AlertTriangle className="mb-3 h-10 w-10 text-amber-500" />
-    <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">Markdown 渲染出错</h3>
-    <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">该内容无法正确渲染，请检查 Markdown 语法</p>
+    <h3 className="text-text mb-2 text-lg font-semibold">Markdown 渲染出错</h3>
+    <p className="text-text-muted mb-4 text-sm">该内容无法正确渲染，请检查 Markdown 语法</p>
     <button
       type="button"
       onClick={() => window.location.reload()}
-      className="flex items-center gap-2 rounded-md bg-black/70 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/80 dark:bg-white/20 dark:hover:bg-white/30"
+      className="flex items-center gap-2 rounded-md bg-black/70 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/80"
     >
       <RefreshCw size={14} />
       刷新页面

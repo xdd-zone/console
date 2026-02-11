@@ -15,14 +15,14 @@ interface HeaderLeftProps {
  */
 export function HeaderLeft({ showBrand = false, showBreadcrumb = false, variant }: HeaderLeftProps) {
   return (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center gap-x-3">
       {/* 移动端菜单按钮 */}
       <div className="md:hidden">
         <MobileMenuButton />
       </div>
 
       {/* 桌面端内容 */}
-      <div className="hidden items-center space-x-3 md:flex">
+      <div className="hidden items-center gap-x-3 md:flex">
         {variant === 'leftRight' && <CollapseButton />}
 
         {showBrand && (

@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
 
 import { Loading } from '@/components/ui/Loading'
 
-const { Title, Paragraph, Text } = Typography
+const { Paragraph, Text, Title } = Typography
 const { RangePicker } = DatePicker
 
 // 定义数据类型
@@ -50,38 +50,38 @@ async function loadDashboardData(): Promise<DashboardStats> {
 // 表格数据
 const tableColumns = [
   {
-    title: 'Name',
     dataIndex: 'name',
     key: 'name',
+    title: 'Name',
   },
   {
-    title: 'Age',
     dataIndex: 'age',
     key: 'age',
+    title: 'Age',
   },
   {
-    title: 'Address',
     dataIndex: 'address',
     key: 'address',
+    title: 'Address',
   },
   {
-    title: 'Status',
     key: 'status',
     render: (_: unknown, record: { status: string }) => {
       const colors: Record<string, string> = {
         Active: 'green',
-        Pending: 'gold',
         Banned: 'red',
+        Pending: 'gold',
       }
       return <Tag color={colors[record.status]}>{record.status}</Tag>
     },
+    title: 'Status',
   },
 ]
 
 const tableData = [
-  { key: '1', name: 'John Brown', age: 32, address: 'New York No. 1 Lake Park', status: 'Active' },
-  { key: '2', name: 'Jim Green', age: 42, address: 'London No. 1 Lake Park', status: 'Pending' },
-  { key: '3', name: 'Joe Black', age: 32, address: 'Sidney No. 1 Lake Park', status: 'Banned' },
+  { address: 'New York No. 1 Lake Park', age: 32, key: '1', name: 'John Brown', status: 'Active' },
+  { address: 'London No. 1 Lake Park', age: 42, key: '2', name: 'Jim Green', status: 'Pending' },
+  { address: 'Sidney No. 1 Lake Park', age: 32, key: '3', name: 'Joe Black', status: 'Banned' },
 ]
 
 export function Dashboard() {
@@ -115,7 +115,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="bg-bg m-4 space-y-8 rounded-lg p-6">
+    <div className="bg-bg gap-y-8 rounded-lg p-6">
       <Title level={2}>Catppuccin 主题测试面板</Title>
 
       {/* ========== 1. 按钮组件 ========== */}
@@ -151,7 +151,7 @@ export function Dashboard() {
       {/* ========== 3. 进度条 ========== */}
       <section>
         <Title level={4}>Progress 进度条</Title>
-        <div className="space-y-4">
+        <div className="gap-y-4">
           <Progress percent={30} />
           <Progress percent={70} status="active" />
           <Progress percent={100} />
@@ -242,19 +242,19 @@ export function Dashboard() {
             defaultActiveKey="1"
             items={[
               {
-                label: 'Tab 1',
-                key: '1',
                 children: <Paragraph className="text-text">标签页内容 1 - 这里是第一个标签的内容</Paragraph>,
+                key: '1',
+                label: 'Tab 1',
               },
               {
-                label: 'Tab 2',
-                key: '2',
                 children: <Paragraph className="text-text">标签页内容 2 - 这里是第二个标签的内容</Paragraph>,
+                key: '2',
+                label: 'Tab 2',
               },
               {
-                label: 'Tab 3',
-                key: '3',
                 children: <Paragraph className="text-text">标签页内容 3 - 这里是第三个标签的内容</Paragraph>,
+                key: '3',
+                label: 'Tab 3',
               },
             ]}
           />
@@ -277,7 +277,7 @@ export function Dashboard() {
       {/* ========== 13. 警告提示 ========== */}
       <section>
         <Title level={4}>Alert 警告提示</Title>
-        <div className="space-2">
+        <div className="flex flex-col gap-2">
           <Alert type="success" description="Success Text" showIcon />
           <Alert type="info" description="Info Text" showIcon />
           <Alert type="warning" description="Warning Text" showIcon />
@@ -334,7 +334,7 @@ export function Dashboard() {
       {/* ========== 文字颜色层级 ========== */}
       <section>
         <Title level={4}>文字颜色层级</Title>
-        <div className="bg-bg-secondary space-y-3 rounded-lg p-6">
+        <div className="bg-bg-secondary gap-y-3 rounded-lg p-6">
           <p className="text-text text-lg">主要文字 (text-text) - 用于正文内容</p>
           <p className="text-text-muted text-base">次要文字 (text-text-muted) - 用于辅助说明</p>
           <p className="text-text-subtle text-sm">提示文字 (text-text-subtle) - 用于标签和小型提示</p>
@@ -344,7 +344,7 @@ export function Dashboard() {
       {/* ========== 背景颜色层级 ========== */}
       <section>
         <Title level={4}>背景颜色层级</Title>
-        <div className="space-y-3">
+        <div className="gap-y-3">
           <div className="bg-bg rounded-lg p-4">
             <Text className="font-medium">主背景 (bg-bg)</Text>
           </div>
