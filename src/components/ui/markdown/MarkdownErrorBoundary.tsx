@@ -16,8 +16,8 @@ interface State {
 const defaultFallback = (
   <div className="flex flex-col items-center justify-center p-8 text-center">
     <AlertTriangle className="mb-3 h-10 w-10 text-amber-500" />
-    <h3 className="text-text mb-2 text-lg font-semibold">Markdown 渲染出错</h3>
-    <p className="text-text-muted mb-4 text-sm">该内容无法正确渲染，请检查 Markdown 语法</p>
+    <h3 className="text-fg mb-2 text-lg font-semibold">Markdown 渲染出错</h3>
+    <p className="text-fg-muted mb-4 text-sm">该内容无法正确渲染，请检查 Markdown 语法</p>
     <button
       type="button"
       onClick={() => window.location.reload()}

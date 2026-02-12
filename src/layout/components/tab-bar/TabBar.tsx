@@ -140,7 +140,7 @@ export function TabBar() {
                 'flex cursor-pointer items-center gap-x-2 rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition-all select-none',
                 activeTabId === tab.id
                   ? 'border-primary bg-primary/10 text-primary'
-                  : 'text-text-muted hover:bg-bg-secondary hover:text-text border-transparent',
+                  : 'text-fg-muted hover:bg-surface-muted hover:text-fg border-transparent',
               )}
             >
               <span>{t(tab.label)}</span>

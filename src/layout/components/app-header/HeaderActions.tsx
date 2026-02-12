@@ -15,7 +15,7 @@ import { UserAvatar } from './UserAvatar'
  */
 export function HeaderActions() {
   return (
-    <div className="text-text-muted flex items-center gap-x-4">
+    <div className="text-fg-muted flex items-center gap-x-4">
       {/* 打开搜索框 */}
       <SearchButton />
 

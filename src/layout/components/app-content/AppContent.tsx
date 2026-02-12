@@ -11,7 +11,7 @@ export function AppContent() {
   const isNavigating = Boolean(navigation.location)
   return (
     <main className="h-full flex-1 overflow-auto p-2">
-      <div className="text-text h-full min-h-full rounded-lg shadow-sm">{isNavigating ? <Loading /> : <Outlet />}</div>
+      <div className="text-fg h-full min-h-full rounded-lg shadow-sm">{isNavigating ? <Loading /> : <Outlet />}</div>
     </main>
   )
 }

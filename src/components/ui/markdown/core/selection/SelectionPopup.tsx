@@ -18,11 +18,11 @@ export function SelectionPopup({ onCopy, position, visible }: SelectionPopupProp
   const style: CSSProperties = { left: position.left, position: 'absolute', top: position.top, zIndex: 50 }
   return (
     <div style={style} className="select-none">
-      <div className={clsx('rounded-md border px-2 py-1 text-sm shadow-md', 'bg-bg-elevated text-text-muted')}>
+      <div className={clsx('rounded-md border px-2 py-1 text-sm shadow-md', 'bg-surface-elevated text-fg-muted')}>
         <button
           type="button"
           onClick={onCopy}
-          className="hover:bg-bg-secondary hover:text-text cursor-pointer rounded px-2 py-0.5 transition-colors"
+          className="hover:bg-surface-muted hover:text-fg cursor-pointer rounded px-2 py-0.5 transition-colors"
         >
           复制
         </button>

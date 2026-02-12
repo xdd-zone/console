@@ -11,7 +11,7 @@ interface BrandProps {
 export function Brand({ className = '' }: BrandProps) {
   const { t } = useTranslation()
   return (
-    <h1 className={`text-text ml-2 overflow-hidden text-xl font-semibold whitespace-nowrap ${className}`}>
+    <h1 className={`text-fg ml-2 overflow-hidden text-xl font-semibold whitespace-nowrap ${className}`}>
       {t('layout.brand')}
     </h1>
   )

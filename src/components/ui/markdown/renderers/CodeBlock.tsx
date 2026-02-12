@@ -110,7 +110,7 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
       <div
         className={clsx(
           'code-lang-badge absolute right-2 bottom-2 flex items-center gap-1 rounded-md px-2 py-1 text-xs',
-          'text-text',
+          'text-fg',
         )}
       >
         <LangIcon lang={language} />

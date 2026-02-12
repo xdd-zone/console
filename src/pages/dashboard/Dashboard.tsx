@@ -108,14 +108,14 @@ export function Dashboard() {
 
   if (!data) {
     return (
-      <div className="bg-bg-elevated m-4 rounded-lg p-4 backdrop-blur-sm">
+      <div className="bg-surface-elevated m-4 rounded-lg p-4 backdrop-blur-sm">
         <Alert type="error" description="无法加载 Dashboard 数据" showIcon />
       </div>
     )
   }
 
   return (
-    <div className="bg-bg gap-y-8 rounded-lg p-6">
+    <div className="bg-surface gap-y-8 rounded-lg p-6">
       <Title level={2}>Catppuccin 主题测试面板</Title>
 
       {/* ========== 1. 按钮组件 ========== */}
@@ -164,7 +164,7 @@ export function Dashboard() {
         <Title level={4}>Slider 滑块</Title>
         <div className="w-64">
           <Slider value={sliderValue} onChange={setSliderValue} />
-          <Text className="text-text-muted">值: {sliderValue}</Text>
+          <Text className="text-fg-muted">值: {sliderValue}</Text>
         </div>
       </section>
 
@@ -173,7 +173,7 @@ export function Dashboard() {
         <Title level={4}>Switch 开关</Title>
         <div className="flex items-center gap-4">
           <Switch checked={switchValue} onChange={setSwitchValue} />
-          <Text className="text-text">{switchValue ? '开启' : '关闭'}</Text>
+          <Text className="text-fg">{switchValue ? '开启' : '关闭'}</Text>
         </div>
       </section>
 
@@ -223,10 +223,10 @@ export function Dashboard() {
         <Title level={4}>Card 卡片</Title>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           <Card title="Default Card" extra={<Button type="link">More</Button>}>
-            <Paragraph className="text-text-muted">卡片内容区域，展示一般性描述文字。</Paragraph>
+            <Paragraph className="text-fg-muted">卡片内容区域，展示一般性描述文字。</Paragraph>
           </Card>
           <Card title="Hover Card" hoverable extra={<Button type="link">More</Button>}>
-            <Paragraph className="text-text-muted">可悬停的卡片，交互效果更丰富。</Paragraph>
+            <Paragraph className="text-fg-muted">可悬停的卡片，交互效果更丰富。</Paragraph>
           </Card>
           <Card actions={[<Button key="1">Action</Button>, <Button key="2">Action</Button>]}>
             <Card.Meta title="Action Card" description="底部带有操作按钮的卡片" />
@@ -242,17 +242,17 @@ export function Dashboard() {
             defaultActiveKey="1"
             items={[
               {
-                children: <Paragraph className="text-text">标签页内容 1 - 这里是第一个标签的内容</Paragraph>,
+                children: <Paragraph className="text-fg">标签页内容 1 - 这里是第一个标签的内容</Paragraph>,
                 key: '1',
                 label: 'Tab 1',
               },
               {
-                children: <Paragraph className="text-text">标签页内容 2 - 这里是第二个标签的内容</Paragraph>,
+                children: <Paragraph className="text-fg">标签页内容 2 - 这里是第二个标签的内容</Paragraph>,
                 key: '2',
                 label: 'Tab 2',
               },
               {
-                children: <Paragraph className="text-text">标签页内容 3 - 这里是第三个标签的内容</Paragraph>,
+                children: <Paragraph className="text-fg">标签页内容 3 - 这里是第三个标签的内容</Paragraph>,
                 key: '3',
                 label: 'Tab 3',
               },
@@ -292,19 +292,19 @@ export function Dashboard() {
           <Card>
             <div className="text-center">
               <Text className="text-primary text-3xl font-bold">{data.stats.users}</Text>
-              <Paragraph className="text-text-muted mt-2">用户数</Paragraph>
+              <Paragraph className="text-fg-muted mt-2">用户数</Paragraph>
             </div>
           </Card>
           <Card>
             <div className="text-center">
               <Text className="text-success text-3xl font-bold">{data.stats.orders}</Text>
-              <Paragraph className="text-text-muted mt-2">订单数</Paragraph>
+              <Paragraph className="text-fg-muted mt-2">订单数</Paragraph>
             </div>
           </Card>
           <Card>
             <div className="text-center">
               <Text className="text-warning text-3xl font-bold">¥{data.stats.revenue.toLocaleString()}</Text>
-              <Paragraph className="text-text-muted mt-2">收入</Paragraph>
+              <Paragraph className="text-fg-muted mt-2">收入</Paragraph>
             </div>
           </Card>
         </div>
@@ -334,10 +334,10 @@ export function Dashboard() {
       {/* ========== 文字颜色层级 ========== */}
       <section>
         <Title level={4}>文字颜色层级</Title>
-        <div className="bg-bg-secondary gap-y-3 rounded-lg p-6">
-          <p className="text-text text-lg">主要文字 (text-text) - 用于正文内容</p>
-          <p className="text-text-muted text-base">次要文字 (text-text-muted) - 用于辅助说明</p>
-          <p className="text-text-subtle text-sm">提示文字 (text-text-subtle) - 用于标签和小型提示</p>
+        <div className="bg-surface-muted gap-y-3 rounded-lg p-6">
+          <p className="text-fg text-lg">主要文字 (text-fg) - 用于正文内容</p>
+          <p className="text-fg-muted text-base">次要文字 (text-fg-muted) - 用于辅助说明</p>
+          <p className="text-fg-subtle text-sm">提示文字 (text-fg-subtle) - 用于标签和小型提示</p>
         </div>
       </section>
 
@@ -345,17 +345,17 @@ export function Dashboard() {
       <section>
         <Title level={4}>背景颜色层级</Title>
         <div className="gap-y-3">
-          <div className="bg-bg rounded-lg p-4">
-            <Text className="font-medium">主背景 (bg-bg)</Text>
+          <div className="bg-surface rounded-lg p-4">
+            <Text className="font-medium">主背景 (bg-surface)</Text>
           </div>
-          <div className="bg-bg-secondary rounded-lg p-4">
-            <Text className="font-medium">次级背景 (bg-bg-secondary)</Text>
+          <div className="bg-surface-muted rounded-lg p-4">
+            <Text className="font-medium">次级背景 (bg-surface-muted)</Text>
           </div>
-          <div className="bg-bg-tertiary rounded-lg p-4">
-            <Text className="font-medium">三级背景 (bg-bg-tertiary)</Text>
+          <div className="bg-surface-1 rounded-lg p-4">
+            <Text className="font-medium">三级背景 (bg-surface-1)</Text>
           </div>
-          <div className="bg-bg-elevated rounded-lg p-4">
-            <Text className="font-medium">悬浮背景 (bg-bg-elevated)</Text>
+          <div className="bg-surface-elevated rounded-lg p-4">
+            <Text className="font-medium">悬浮背景 (bg-surface-elevated)</Text>
           </div>
         </div>
       </section>

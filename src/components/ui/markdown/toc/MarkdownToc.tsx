@@ -29,7 +29,7 @@ export const Toc: FC<TocProps> = ({ className, containerRef, maxLevel = 6, minLe
           <button
             type="button"
             onClick={scrollToTop}
-            className="text-text-muted/60 hover:text-primary mt-3 flex cursor-pointer items-center gap-1 text-xs"
+            className="text-fg-muted/60 hover:text-primary mt-3 flex cursor-pointer items-center gap-1 text-xs"
             aria-label="返回顶部"
           >
             <ArrowUp size={14} />
