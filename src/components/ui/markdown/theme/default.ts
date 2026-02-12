@@ -11,10 +11,10 @@ export const defaultMarkdownTheme: MarkdownTheme = {
   },
   // 代码块：容器、复制按钮与 `<pre>` 的样式
   code: {
-    container: 'group relative my-4',
+    container: 'group relative my-4 rounded-lg bg-bg-secondary overflow-hidden',
     copyButton:
       'absolute top-2 right-2 rounded-md border border bg-bg px-2 py-1 text-xs text-text-muted opacity-0 transition-opacity group-hover:opacity-100 cursor-pointer hover:bg-bg-secondary',
-    pre: 'overflow-x-auto rounded-lg bg-bg-secondary p-3 text-sm text-text',
+    pre: 'w-fulloverflow-x-auto rounded-lg bg-bg-secondary p-3 pb-10 text-sm text-text',
   },
   // 全局容器：控制排版与选区样式
   container: 'prose max-w-none selection:bg-primary/30 selection:text-white text-text',

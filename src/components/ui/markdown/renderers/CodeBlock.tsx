@@ -80,12 +80,33 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
   return (
     <div className={clsx(theme.code.container, 'markdown-code-with-lines', className)}>
       {html ? (
-        <div className="rounded-md p-4 backdrop-blur-sm" dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="p-3 pb-8 backdrop-blur-sm">
+          <div className='w-full overflow-x-auto pb-4' dangerouslySetInnerHTML={{ __html: html }} />
+
+          <button
+            type="button"
+            aria-label={copied ? 'Copied' : 'Copy'}
+            onClick={() => navigator.clipboard?.writeText(code).then(() => setCopied(true))}
+            className={clsx(theme.code.copyButton)}
+          >
+            {copied ? <Check size={14} /> : <Copy size={14} />}
+          </button>
+        </div>
       ) : (
         <pre className={clsx(theme.code.pre)}>
           <code>{code}</code>
+
+          <button
+            type="button"
+            aria-label={copied ? 'Copied' : 'Copy'}
+            onClick={() => navigator.clipboard?.writeText(code).then(() => setCopied(true))}
+            className={clsx(theme.code.copyButton)}
+          >
+            {copied ? <Check size={14} /> : <Copy size={14} />}
+          </button>
         </pre>
       )}
+
       <div
         className={clsx(
           'code-lang-badge absolute right-2 bottom-2 flex items-center gap-1 rounded-md px-2 py-1 text-xs',
@@ -94,14 +115,6 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
       >
         <LangIcon lang={language} />
       </div>
-      <button
-        type="button"
-        aria-label={copied ? 'Copied' : 'Copy'}
-        onClick={() => navigator.clipboard?.writeText(code).then(() => setCopied(true))}
-        className={clsx(theme.code.copyButton)}
-      >
-        {copied ? <Check size={14} /> : <Copy size={14} />}
-      </button>
     </div>
   )
 }
