@@ -34,7 +34,7 @@ interface DashboardStats {
 
 // 模拟异步数据加载
 async function loadDashboardData(): Promise<DashboardStats> {
-  await new Promise((resolve) => setTimeout(resolve, 3000))
+  await new Promise((resolve) => setTimeout(resolve, 1000))
 
   return {
     message: 'Dashboard loaded successfully!',
