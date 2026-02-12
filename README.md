@@ -38,7 +38,7 @@ cd apps/admin
 pnpm run dev
 ```
 
-访问 [http://localhost:5173](http://localhost:5173) 查看应用。
+访问 [http://localhost:2333](http://localhost:2333) 查看应用。
 
 ## 项目结构
 
