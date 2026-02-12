@@ -41,19 +41,19 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
       open={open}
       size="default"
       classNames={{
-        body: 'bg-cat-secondary',
-        footer: 'bg-cat-tertiary border-cat',
-        header: 'bg-cat-tertiary border-cat text-cat',
+        body: 'bg-surface',
+        footer: 'bg-surface-muted border-border',
+        header: 'bg-surface-muted border-border text-fg',
         mask: 'bg-black/50',
-        wrapper: 'text-cat',
+        wrapper: 'text-fg',
       }}
       styles={{
         body: {
-          color: 'var(--cat-text)',
+          color: 'var(--ctp-text)',
         },
         header: {
-          borderBottom: '1px solid var(--cat-border)',
-          color: 'var(--cat-text)',
+          borderBottom: '1px solid var(--ctp-crust)',
+          color: 'var(--ctp-text)',
         },
       }}
     >
@@ -61,19 +61,19 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
         {/* 主题模式设置 */}
         <div>
           <Title level={5}>
-            <div className="text-cat">
+            <div className="text-fg">
               <Lightbulb className="mr-2" />
               {t('setting.themeMode')}
             </div>
           </Title>
-          <Text className="text-cat-muted" type="secondary">
+          <Text className="text-fg-muted" type="secondary">
             {t('setting.themeModeDescription')}
           </Text>
           <div style={{ marginTop: 12 }}>
             <Space orientation="horizontal" style={{ width: '100%' }}>
               <ResponsiveTooltip title={t('theme.lightMode')}>
                 <div
-                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${themeMode === 'light' ? 'text-primary' : 'text-cat-muted'}`}
+                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${themeMode === 'light' ? 'text-primary' : 'text-fg-muted'}`}
                   onClick={() => handleThemeChange('light')}
                 >
                   <Sun />
@@ -81,7 +81,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
               </ResponsiveTooltip>
               <ResponsiveTooltip title={t('theme.darkMode')}>
                 <div
-                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${themeMode === 'dark' ? 'text-primary' : 'text-cat-muted'}`}
+                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${themeMode === 'dark' ? 'text-primary' : 'text-fg-muted'}`}
                   onClick={() => handleThemeChange('dark')}
                 >
                   <Moon />
@@ -89,7 +89,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
               </ResponsiveTooltip>
               <ResponsiveTooltip title={t('theme.followSystem')}>
                 <div
-                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${themeMode === 'system' ? 'text-primary' : 'text-cat-muted'}`}
+                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${themeMode === 'system' ? 'text-primary' : 'text-fg-muted'}`}
                   onClick={() => handleThemeChange('system')}
                 >
                   <Monitor />
@@ -102,12 +102,12 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
         {/* Catppuccin 主题设置 */}
         <div>
           <Title level={5}>
-            <div className="text-cat">
+            <div className="text-fg">
               <Palette className="mr-2" />
               {t('setting.catppuccinTheme')}
             </div>
           </Title>
-          <Text className="text-cat-muted" type="secondary">
+          <Text className="text-fg-muted" type="secondary">
             {t('setting.catppuccinThemeDescription')}
           </Text>
           <div style={{ marginTop: 12 }}>
@@ -118,11 +118,11 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
                   <div
                     key={theme.id}
                     className={`cursor-pointer rounded-lg border-2 p-3 transition-all duration-200 ${
-                      isSelected ? 'border-primary' : 'border-cat-subtle hover:border-cat'
+                      isSelected ? 'border-primary' : 'border-border-subtle hover:border-border'
                     }`}
                     onClick={() => handleThemeSelect(theme.id)}
                   >
-                    <div className="text-cat mb-2 text-sm font-medium">{t(`catppuccin.${theme.id}`)}</div>
+                    <div className="text-fg mb-2 text-sm font-medium">{t(`catppuccin.${theme.id}`)}</div>
                     <div className="flex flex-wrap gap-0.5">
                       {theme.colors.map((color) => (
                         <div
@@ -143,12 +143,12 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
         {/* 布局设置 */}
         <div>
           <Title level={5}>
-            <div className="text-cat">
+            <div className="text-fg">
               <Layout className="mr-2" />
               {t('setting.layoutMode')}
             </div>
           </Title>
-          <Text className="text-cat-muted" type="secondary">
+          <Text className="text-fg-muted" type="secondary">
             {t('setting.layoutModeDescription')}
           </Text>
           <div style={{ marginTop: 12 }}>
@@ -156,7 +156,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
               {/* 左右布局图标 */}
               <ResponsiveTooltip title={t('setting.leftRightLayout')}>
                 <div
-                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${layoutMode === 'leftRight' ? 'text-primary' : 'text-cat-muted'}`}
+                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${layoutMode === 'leftRight' ? 'text-primary' : 'text-fg-muted'}`}
                   onClick={() => handleLayoutChange('leftRight')}
                 >
                   <PanelLeft />
@@ -165,7 +165,7 @@ export function SettingDrawer({ onClose, open }: SettingDrawerProps) {
               {/* 上下布局图标 */}
               <ResponsiveTooltip title={t('setting.topBottomLayout')}>
                 <div
-                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${layoutMode === 'topBottom' ? 'text-primary' : 'text-cat-muted'}`}
+                  className={`hover:text-primary cursor-pointer text-center text-2xl transition-colors ${layoutMode === 'topBottom' ? 'text-primary' : 'text-fg-muted'}`}
                   onClick={() => handleLayoutChange('topBottom')}
                 >
                   <PanelTop />

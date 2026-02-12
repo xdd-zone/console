@@ -31,6 +31,7 @@
   --color-surface: var(--ctp-base);
   --color-surface-muted: var(--ctp-mantle);
   --color-surface-subtle: var(--ctp-crust);
+  --color-surface-elevated: var(--ctp-overlay-1);
 
   /* 表面元素层级 */
   --color-surface-0: var(--ctp-surface-0);

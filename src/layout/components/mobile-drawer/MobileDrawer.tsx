@@ -27,10 +27,10 @@ export function MobileDrawer() {
       size="default"
       mask={{ closable: true }}
       classNames={{
-        body: 'bg-cat',
-        header: 'bg-cat-secondary border-cat text-cat',
+        body: 'bg-surface',
+        header: 'bg-surface-muted border-border text-fg',
         mask: 'bg-black/50',
-        wrapper: 'text-cat',
+        wrapper: 'text-fg',
       }}
       styles={{
         body: {

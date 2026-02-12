@@ -14,8 +14,8 @@ export function Login() {
     <AuthContainer>
       {/* 标题 */}
       <div className="mb-8 text-center">
-        <h1 className="text-cat mb-2 text-2xl font-bold">{t('auth.loginTitle')}</h1>
-        <p className="text-cat-muted">{t('auth.loginWelcome')}</p>
+        <h1 className="text-fg mb-2 text-2xl font-bold">{t('auth.loginTitle')}</h1>
+        <p className="text-fg-muted">{t('auth.loginWelcome')}</p>
       </div>
 
       {/* 登录表单 */}
@@ -55,20 +55,20 @@ export function Login() {
 
       {/* 分割线 */}
       <Divider className="my-6">
-        <span className="text-cat-subtle text-sm">{t('auth.orSocialLogin')}</span>
+        <span className="text-fg-subtle text-sm">{t('auth.orSocialLogin')}</span>
       </Divider>
 
       {/* 社交登录按钮 */}
       <div className="flex gap-4">
         <Button
           icon={<AiFillWechat />}
-          className="border-cat text-cat-muted h-12 flex-1 rounded-lg bg-transparent transition-colors hover:border-green-500 hover:text-green-500"
+          className="border-border text-fg-muted hover:border-success hover:text-success h-12 flex-1 rounded-lg bg-transparent transition-colors"
         >
           {t('auth.wechatLogin')}
         </Button>
         <Button
           icon={<AiOutlineGoogle />}
-          className="border-cat text-cat-muted h-12 flex-1 rounded-lg bg-transparent transition-colors hover:border-red-500 hover:text-red-500"
+          className="border-border text-fg-muted hover:border-error hover:text-error h-12 flex-1 rounded-lg bg-transparent transition-colors"
         >
           {t('auth.googleLogin')}
         </Button>
@@ -76,7 +76,7 @@ export function Login() {
 
       {/* 注册链接 */}
       <div className="mt-6 text-center">
-        <span className="text-cat-muted text-sm">{t('auth.noAccount')}</span>
+        <span className="text-fg-muted text-sm">{t('auth.noAccount')}</span>
         <a href="#" className="text-primary-cat hover:text-primary-hover ml-1 text-sm transition-colors">
           {t('auth.registerNow')}
         </a>

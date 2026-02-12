@@ -162,12 +162,6 @@
 /* Latte（默认亮色主题） */
 :root,
 [data-theme='latte'] {
-  /* 背景语义色 */
-  --ctp-bg-primary: var(--ctp-base);
-  --ctp-bg-secondary: var(--ctp-mantle);
-  --ctp-bg-tertiary: var(--ctp-mantle);
-  --ctp-bg-elevated: var(--ctp-mantle);
-
   /* 边框语义色 */
   --ctp-border: var(--ctp-crust);
   --ctp-border-subtle: var(--ctp-base);
@@ -191,14 +185,11 @@
 
 /* Frappé 语义变量覆盖 */
 [data-theme='frappe'] {
-  --ctp-bg-primary: var(--ctp-base);
-  --ctp-bg-secondary: var(--ctp-mantle);
-  --ctp-bg-tertiary: var(--ctp-mantle);
-  --ctp-bg-elevated: var(--ctp-mantle);
-
+  /* 边框语义色 */
   --ctp-border: var(--ctp-crust);
   --ctp-border-subtle: var(--ctp-base);
 
+  /* 文字语义色 */
   --ctp-fg-primary: var(--ctp-text);
   --ctp-fg-secondary: var(--ctp-subtext-0);
   --ctp-fg-muted: var(--ctp-subtext-1);
@@ -215,14 +206,11 @@
 
 /* Macchiato 语义变量覆盖 */
 [data-theme='macchiato'] {
-  --ctp-bg-primary: var(--ctp-base);
-  --ctp-bg-secondary: var(--ctp-mantle);
-  --ctp-bg-tertiary: var(--ctp-mantle);
-  --ctp-bg-elevated: var(--ctp-mantle);
-
+  /* 边框语义色 */
   --ctp-border: var(--ctp-crust);
   --ctp-border-subtle: var(--ctp-base);
 
+  /* 文字语义色 */
   --ctp-fg-primary: var(--ctp-text);
   --ctp-fg-secondary: var(--ctp-subtext-0);
   --ctp-fg-muted: var(--ctp-subtext-1);
@@ -239,14 +227,11 @@
 
 /* Mocha 语义变量覆盖 */
 [data-theme='mocha'] {
-  --ctp-bg-primary: var(--ctp-base);
-  --ctp-bg-secondary: var(--ctp-mantle);
-  --ctp-bg-tertiary: var(--ctp-mantle);
-  --ctp-bg-elevated: var(--ctp-mantle);
-
+  /* 边框语义色 */
   --ctp-border: var(--ctp-crust);
   --ctp-border-subtle: var(--ctp-base);
 
+  /* 文字语义色 */
   --ctp-fg-primary: var(--ctp-text);
   --ctp-fg-secondary: var(--ctp-subtext-0);
   --ctp-fg-muted: var(--ctp-subtext-1);

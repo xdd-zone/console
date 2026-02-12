@@ -321,7 +321,7 @@ export function Dashboard() {
           <div className="bg-red rounded-lg p-3 text-center text-white shadow-sm">red</div>
           <div className="bg-maroon rounded-lg p-3 text-center text-white shadow-sm">maroon</div>
           <div className="bg-peach rounded-lg p-3 text-center text-white shadow-sm">peach</div>
-          <div className="bg-yellow rounded-lg p-3 text-center text-gray-900 shadow-sm">yellow</div>
+          <div className="bg-yellow text-yellow rounded-lg p-3 text-center shadow-sm">yellow</div>
           <div className="bg-green rounded-lg p-3 text-center text-white shadow-sm">green</div>
           <div className="bg-teal rounded-lg p-3 text-center text-white shadow-sm">teal</div>
           <div className="bg-sky rounded-lg p-3 text-center text-white shadow-sm">sky</div>

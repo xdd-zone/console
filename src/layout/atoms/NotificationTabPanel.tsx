@@ -32,8 +32,8 @@ export function NotificationTabPanel({
           <div key={item.id} className="hover:bg-primary/10 flex cursor-pointer items-center rounded p-3">
             <div className="mr-4">{item.avatar ? <Avatar src={item.avatar} /> : item.icon}</div>
             <div className="flex flex-col">
-              <div className="text-cat text-sm">{item.title}</div>
-              <div className="text-cat-muted mt-1 text-xs">{item.datetime}</div>
+              <div className="text-fg text-sm">{item.title}</div>
+              <div className="text-fg-muted mt-1 text-xs">{item.datetime}</div>
             </div>
             {item.extra && <div className="ml-auto">{item.extra}</div>}
           </div>
