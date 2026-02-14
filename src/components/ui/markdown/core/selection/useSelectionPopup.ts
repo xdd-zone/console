@@ -1,4 +1,4 @@
-import type { MutableRefObject } from 'react'
+import type { RefObject } from 'react'
 
 import { useCallback, useEffect, useState } from 'react'
 
@@ -13,7 +13,7 @@ interface Position {
  * - 自动在 `selectionchange`/`scroll`/`resize` 时隐藏弹窗以避免错位
  * - `copy`：将当前选中文本写入剪贴板
  */
-export function useSelectionPopup(containerRef: MutableRefObject<HTMLDivElement | null>) {
+export function useSelectionPopup(containerRef: RefObject<HTMLDivElement | null>) {
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState<Position | null>(null)
   const [text, setText] = useState('')

@@ -19,9 +19,7 @@ import { useMarkdownTheme } from '../theme/useTheme'
 type PreProps = JSX.IntrinsicElements['pre']
 
 const useHighlighter = () => {
-  const highlighter = createClientHighlighter()
-
-  return highlighter
+  return useMemo(() => createClientHighlighter(), [])
 }
 
 const LangIcon: FC<{ lang: string }> = ({ lang }) => {
@@ -61,7 +59,9 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
       const lang = language || 'text'
       try {
         await ensureLanguageLoaded(highlighter, lang)
-      } catch {}
+      } catch (error) {
+        console.warn('语言加载失败:', lang, error)
+      }
       const htmlText = codeToHtml(highlighter, { code, lang, themeId: catppuccinTheme })
       if (!disposed) setHtml(htmlText)
     }
@@ -81,7 +81,7 @@ export const CodeBlock: FC<PreProps> = ({ children, className }) => {
     <div className={clsx(theme.code.container, 'markdown-code-with-lines', className)}>
       {html ? (
         <div className="p-3 pb-8 backdrop-blur-sm">
-          <div className='w-full overflow-x-auto pb-4' dangerouslySetInnerHTML={{ __html: html }} />
+          <div className="w-full overflow-x-auto pb-4" dangerouslySetInnerHTML={{ __html: html }} />
 
           <button
             type="button"

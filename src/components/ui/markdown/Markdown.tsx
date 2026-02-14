@@ -74,6 +74,7 @@ const MarkdownInner = ({ accentColor, className, md }: { accentColor?: string; c
     <div className={clsx('relative lg:grid lg:grid-cols-[1fr_280px] lg:gap-8', className)}>
       <div ref={containerRef} onMouseUp={onMouseUp} className={clsx(theme.container)} style={style}>
         {compiler(md, {
+          disableParsingRawHTML: true,
           overrides: {
             a: Anchor,
             blockquote: Blockquote,
